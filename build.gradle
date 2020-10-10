@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -23,4 +23,50 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+/** 可読性と管理性を考慮しバージョンはここに記載 **/
+
+ext {
+    // APP ver
+    compileSdkVersion = 30
+    targetSdkVersion = 30
+    minSdkVersion = 21
+
+    // AAC
+    lifecycleVersion = "2.2.0"
+    // fragment, activity-ktx
+    fragmentKtxVersion = "1.2.5"
+
+    // navigation
+    navigationVersion = "2.3.0"
+
+    // DI
+    // dagger
+    daggerVersion = "2.27"
+
+    // データベース関連
+    // room
+    roomVersion = "2.2.5"
+
+    // http通信関係
+    // retrofit
+    retrofitVersion = "2.9.0"
+    // Gson
+    gsonVersion = "2.8.6"
+    gsonConverterVersion = "2.9.0"
+
+    // 画像関連
+    // glide
+    glideVersion = "4.11.0"
+    // crop image
+    imageCropperVersion = "2.8.+"
+
+    // view関連
+    // Epoxy
+    epoxyVersion = "3.11.0"
+    // motionLayout
+    constraintLayoutVersion = "2.0.2"
+    // material design
+    materialVersion = "1.2.1"
 }

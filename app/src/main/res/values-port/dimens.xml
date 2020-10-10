@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- dimension resource   -->
+    <!--    <dimen name="test_case">20dp</dimen>-->
+
+    <!-- integer resource   -->
+    <integer name="home_columns">2</integer>
+</resources>

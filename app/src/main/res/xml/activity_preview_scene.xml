@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start"></ConstraintSet>
+
+    <ConstraintSet android:id="@+id/dragDownMiddle">
+        <Constraint
+            android:id="@+id/border"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.7" />
+    </ConstraintSet>
+    <Transition
+        android:id="@+id/dragDownMiddle"
+        motion:constraintSetEnd="@+id/dragDownMiddle"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@+id/borderNav" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/dragUpMiddle">
+        <Constraint
+            android:id="@+id/border"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.3" />
+    </ConstraintSet>
+    <Transition
+        android:id="@+id/dragUpMiddle"
+        motion:constraintSetEnd="@+id/dragUpMiddle"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@+id/borderNav" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/dragDownEnd">
+        <Constraint
+            android:id="@+id/border"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.85" />
+    </ConstraintSet>
+    <Transition
+        android:id="@+id/dragDownEnd"
+        motion:constraintSetEnd="@+id/dragDownEnd"
+        motion:constraintSetStart="@id/dragDownMiddle"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@+id/borderNav" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/dragUpEnd">
+        <Constraint
+            android:id="@+id/border"
+            android:layout_width="0dp"
+            android:layout_height="4dp"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.15" />
+    </ConstraintSet>
+    <Transition
+        android:id="@+id/dragUpEnd"
+        motion:constraintSetEnd="@+id/dragUpEnd"
+        motion:constraintSetStart="@+id/dragUpMiddle"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@+id/borderNav" />
+    </Transition>
+
+</MotionScene>
