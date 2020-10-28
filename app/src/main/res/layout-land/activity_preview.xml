@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.visiontranslator.viewmodel.PreviewViewModel" />
+            type="com.example.visiontranslator.presentation.ui.preview.PreviewViewModel" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_preview_scene_land"
-        tools:context=".view.ui.activity.PreviewActivity"
+        tools:context=".presentation.ui.preview.PreviewActivity"
         tools:showPaths="true">
 
         <ImageView

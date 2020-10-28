@@ -7,4 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <drawable name="transparameter">#7f000000</drawable>
+    <style name="TransparentDialogTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/transparameter</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

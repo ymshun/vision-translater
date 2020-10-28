@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.visiontranslator.presentation.ui.translation.TranslationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cardview_dark_background"
+        android:onClick="@{()->viewmodel.onClickDisplay()}"
+        tools:context=".presentation.ui.translation.TranslationActivity">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.75"
+            android:text="テストケース"
+            android:textColor="@android:color/white"
+            app:icon="@drawable/photo"
+            app:iconTint="@android:color/white"
+            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cropFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.75"
+            android:foregroundTint="@android:color/white"
+            android:onClick="@{()->viewmodel.openCropEvent()}"
+            app:fabSize="mini"
+            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
+            app:srcCompat="@drawable/crop"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.75"
+            android:onClick="@{()-> viewmodel.showGalleryEvent()}"
+            app:fabSize="mini"
+            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cropFab"
+            app:srcCompat="@drawable/filter"
+            app:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/translateImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher_background"
+            app:glideSrc="@{viewmodel.imageUri}"
+            app:layout_constraintBottom_toTopOf="@+id/translateBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/translateBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/translate"
+            android:onClick="@{()->viewmodel.translate()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,14 +1,17 @@
 package com.example.visiontranslator
 
 import android.app.Application
+import com.example.visiontranslator.di.ApplicationComponent
+import com.example.visiontranslator.di.ApplicationModule
+import com.example.visiontranslator.di.DaggerApplicationComponent
 
 /**
- * Applicationクラスでroom, daggerなどの初期化を行う
+ * Applicationクラスでdaggerなどの初期化を行う
  */
 class AppApplication : Application() {
 
     companion object {
-        lateinit var component: AppApplicationComponent
+        lateinit var component: ApplicationComponent
     }
 
 
@@ -19,8 +22,8 @@ class AppApplication : Application() {
     }
 
     private fun initDagger() {
-        component = DaggerAppApplicationComponent.builder()
-            .appApplicationModule(AppApplicationModule(this))
+        component = DaggerApplicationComponent.builder()
+            .applicationModule(ApplicationModule(this))
             .build()
     }
 }
