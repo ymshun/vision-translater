@@ -3,14 +3,12 @@ package com.example.visiontranslator.presentation.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.visiontranslator.AppApplication
 import com.example.visiontranslator.R
 import com.example.visiontranslator.databinding.ActivityHomeBinding
-import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.presentation.ui.translation.TranslationActivity
 import com.example.visiontranslator.util.EventObserver
@@ -35,16 +33,16 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
-    private var controllerHome: HomeEpoxyController? = null
+    private lateinit var homeController: HomeEpoxyController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppApplication.component.inject(this)
         // Data Binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        binding.run {
-            lifecycleOwner = this@HomeActivity
-            viewmodel = viewModel
+        binding.let {
+            it.lifecycleOwner = this@HomeActivity
+            it.viewmodel = viewModel
         }
 
         setupEpoxy()
@@ -54,16 +52,18 @@ class HomeActivity : AppCompatActivity() {
 
     /**
      * 翻訳した文と画像をリスト表示するEpoxyを生成
-     *
      */
-    fun setupEpoxy() {
-        controllerHome = HomeEpoxyController(viewModel)
-        controllerHome!!.setData("")
-        epoxyRecyclerViewMain.adapter = controllerHome!!.adapter
+    private fun setupEpoxy() {
+        homeController = HomeEpoxyController(viewModel)
+        epoxyRecyclerViewMain.adapter = homeController.adapter
+        refreshTranslationList()
+        viewModel.translationList.observe(this) { translationList ->
+            homeController.setData(translationList)
+        }
     }
 
 
-    fun setupNavigation() {
+    private fun setupNavigation() {
         viewModel.openImageSelectEvent.observe(this, EventObserver {
             val intent = Intent(this, TranslationActivity::class.java)
             startActivity(intent)
@@ -84,5 +84,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         })
     }
+
+    /**
+     * ローカルからTranslationListを取得しなおしてビューを更新
+     */
+    private fun refreshTranslationList() = viewModel.loadTranslations()
 
 }

@@ -1,22 +1,23 @@
 package com.example.visiontranslator.presentation.ui.home
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.visiontranslator.infra.repository.translations.TranslationsRepository
+import com.example.visiontranslator.domain.home.HomeUseCase
+import com.example.visiontranslator.infra.model.translation.Translation
+import com.example.visiontranslator.presentation.ui.base.BaseViewModel
 import com.example.visiontranslator.util.Event
 import javax.inject.Inject
 
 class HomeViewModel
 @Inject constructor(
-    private val repository: TranslationsRepository
-//    private val context: Context
-//    private val appDatabase: AppDatabase
-) : ViewModel() {
-    init {
-//        Log.d("test00", repository.deleteTranslation(0))
-        repository.deleteTranslation(0)
-    }
+    context: Context,
+    private val homeUseCase: HomeUseCase
+) : BaseViewModel(context.applicationContext) {
+
+    private val _translationList = MutableLiveData<List<Translation>>()
+    val translationList: LiveData<List<Translation>>
+        get() = _translationList
 
     // 画像選択画面遷移
     private val _openImageSelectEvent = MutableLiveData<Event<Unit>>()
@@ -38,12 +39,13 @@ class HomeViewModel
     val openPreviewEvent: LiveData<Event<Int>>
         get() = _openPreviewEvent
 
-    init {
-
-    }
-
+    /**
+     * リスト表示するTranslationデータをロードする
+     */
     fun loadTranslations() {
-
+        processCall {
+            _translationList.value = homeUseCase.getAllTranslations()
+        }
     }
 
     /** イベント通知系 **/

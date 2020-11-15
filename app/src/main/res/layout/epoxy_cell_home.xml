@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="title"
-            type="String" />
+            name="translation"
+            type="com.example.visiontranslator.infra.model.translation.Translation" />
 
         <variable
             name="src"
@@ -51,8 +51,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:padding="4dp"
-                android:text="@{title}"
-                tools:text="サンプルテキストaaaaaaaaaaaaaaa" />
+                android:text="@{translation.translatedText}"
+                tools:text="サンプルテキスト(editor上でのみ表示)" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

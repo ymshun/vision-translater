@@ -1,9 +1,8 @@
 package com.example.visiontranslator.domain.translation
 
 import android.net.Uri
-import android.util.Log
 import com.example.visiontranslator.infra.model.translation.Translation
-import com.example.visiontranslator.infra.model.translation.TranslationDao
+import com.example.visiontranslator.infra.repository.translation.TranslationRepository
 import com.example.visiontranslator.infra.service.ocr.OCRService
 import com.example.visiontranslator.infra.service.translate.TranslateService
 import javax.inject.Inject
@@ -11,13 +10,13 @@ import javax.inject.Inject
 /**
  * UseCaseは今プロジェクトにおいては画面単位で作成する
  *
- * 写真の文字を翻訳するための UseCase
+ * 翻訳画面TranslationActivityで使用するuse case
  */
 class TranslationUseCaseImpl
 @Inject constructor(
     private val ocrService: OCRService,
     private val translateService: TranslateService,
-    private val translationDao: TranslationDao
+    private val translationRepository: TranslationRepository
 ) : TranslationUseCase {
 
     /**
@@ -28,9 +27,7 @@ class TranslationUseCaseImpl
      */
     override suspend fun translateText(imgUri: Uri): Long {
         val detectedTranslation = detectTextFromImg(imgUri)
-        Log.d("test000", detectedTranslation.toString())
         val translatedText = translateText(detectedTranslation)
-        Log.d("test0001", translatedText.toString())
         return insertTranslation(
             detectedTranslation.apply {
                 this.translatedText = translatedText
@@ -58,6 +55,6 @@ class TranslationUseCaseImpl
      * TranslationモデルをローカルDBに保存する
      */
     private suspend fun insertTranslation(translation: Translation): Long =
-        translationDao.insertTranslation(translation)
+        translationRepository.insertTranslation(translation)
 
 }

@@ -1,5 +1,9 @@
 package com.example.visiontranslator.domain
 
+import com.example.visiontranslator.domain.home.HomeUseCase
+import com.example.visiontranslator.domain.home.HomeUseCaseImpl
+import com.example.visiontranslator.domain.preview.PreviewUseCase
+import com.example.visiontranslator.domain.preview.PreviewUseCaseImpl
 import com.example.visiontranslator.domain.translation.TranslationUseCase
 import com.example.visiontranslator.domain.translation.TranslationUseCaseImpl
 import dagger.Binds
@@ -24,8 +28,21 @@ abstract class DomainModule {
 
     @Singleton
     @Binds
+    abstract fun bindsHomeUseCase(
+        useCase: HomeUseCaseImpl
+    ): HomeUseCase
+
+    @Singleton
+    @Binds
     abstract fun bindsTranslationUseCase(
         useCase: TranslationUseCaseImpl
     ): TranslationUseCase
+
+    @Singleton
+    @Binds
+    abstract fun bindsPreviewUseCase(
+        useCase: PreviewUseCaseImpl
+    ): PreviewUseCase
+
 
 }

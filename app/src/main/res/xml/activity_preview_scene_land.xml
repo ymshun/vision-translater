@@ -16,13 +16,14 @@
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
     <Transition
-        android:id="@+id/dragRightMiddle"
-        motion:constraintSetEnd="@+id/dragRightMiddle"
-        motion:constraintSetStart="@+id/start"
+        android:id="@+id/dragRightMiddleTransition"
+        motion:constraintSetEnd="@id/dragRightMiddle"
+        motion:constraintSetStart="@id/start"
         motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragRight"
-            motion:touchAnchorId="@+id/borderNav" />
+            motion:touchAnchorId="@id/borderNav"
+            motion:touchRegionId="@id/borderNav" />
     </Transition>
 
     <ConstraintSet android:id="@+id/dragLeftMiddle">
@@ -37,13 +38,14 @@
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
     <Transition
-        android:id="@+id/dragLeftMiddle"
-        motion:constraintSetEnd="@+id/dragLeftMiddle"
-        motion:constraintSetStart="@+id/start"
+        android:id="@+id/dragLeftMiddleTransition"
+        motion:constraintSetEnd="@id/dragLeftMiddle"
+        motion:constraintSetStart="@id/start"
         motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragLeft"
-            motion:touchAnchorId="@+id/borderNav" />
+            motion:touchAnchorId="@id/borderNav"
+            motion:touchRegionId="@id/borderNav" />
     </Transition>
 
     <ConstraintSet android:id="@+id/dragRightEnd">
@@ -58,13 +60,14 @@
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
     <Transition
-        android:id="@+id/dragRightEnd"
-        motion:constraintSetEnd="@+id/dragRightEnd"
+        android:id="@+id/dragRightEndTransition"
+        motion:constraintSetEnd="@id/dragRightEnd"
         motion:constraintSetStart="@id/dragRightMiddle"
         motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragRight"
-            motion:touchAnchorId="@+id/borderNav" />
+            motion:touchAnchorId="@id/borderNav"
+            motion:touchRegionId="@id/borderNav" />
     </Transition>
 
     <ConstraintSet android:id="@+id/dragLeftEnd">
@@ -79,13 +82,14 @@
             motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
     <Transition
-        android:id="@+id/dragLeftEnd"
-        motion:constraintSetEnd="@+id/dragLeftEnd"
-        motion:constraintSetStart="@+id/dragLeftMiddle"
+        android:id="@+id/dragLeftEndTransition"
+        motion:constraintSetEnd="@id/dragLeftEnd"
+        motion:constraintSetStart="@id/dragLeftMiddle"
         motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragLeft"
-            motion:touchAnchorId="@+id/borderNav" />
+            motion:touchAnchorId="@id/borderNav"
+            motion:touchRegionId="@id/borderNav" />
     </Transition>
 
 </MotionScene>

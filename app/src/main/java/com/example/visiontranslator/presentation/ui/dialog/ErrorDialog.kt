@@ -1,4 +1,4 @@
-package com.example.visiontranslator.presentation.dialog
+package com.example.visiontranslator.presentation.ui.dialog
 
 import android.app.Dialog
 import android.content.Context

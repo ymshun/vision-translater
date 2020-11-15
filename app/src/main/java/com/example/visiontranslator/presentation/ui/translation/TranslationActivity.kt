@@ -6,12 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.example.visiontranslator.AppApplication
 import com.example.visiontranslator.R
 import com.example.visiontranslator.databinding.ActivityTranslationBinding
-import com.example.visiontranslator.presentation.dialog.ErrorDialog
-import com.example.visiontranslator.presentation.dialog.LoadingTransparentDialog
+import com.example.visiontranslator.presentation.ui.dialog.ErrorDialog
+import com.example.visiontranslator.presentation.ui.dialog.LoadingTransparentDialog
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.util.ConstantKey.RequestCode.REQUEST_GALLERY
 import com.example.visiontranslator.util.EventObserver
@@ -39,15 +38,11 @@ class TranslationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // dagger inject
         AppApplication.component.inject(this)
-
-        // data binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_translation)
-        binding.run {
-            lifecycleOwner = this@TranslationActivity
-            viewmodel = viewModel
+        binding.let {
+            it.lifecycleOwner = this@TranslationActivity
+            it.viewmodel = viewModel
         }
 
         setupGallery()
@@ -56,6 +51,21 @@ class TranslationActivity : AppCompatActivity() {
         setupNavigation()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_GALLERY -> {
+                viewModel.setImageUri(data?.data)
+            }
+            CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
+                val result: CropImage.ActivityResult? = CropImage.getActivityResult(data)
+                viewModel.setImageUri(result?.uri)
+            }
+            CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE -> {
+
+            }
+        }
+    }
 
     private fun setupGallery() {
         viewModel.showGalleryEvent.observe(this, EventObserver {
@@ -73,15 +83,17 @@ class TranslationActivity : AppCompatActivity() {
      * 各ダイアログの設定
      */
     private fun setupDialog() {
-        // ローディングダイアログ
-        viewModel.loading.observe(this) { isLoading ->
-            if (isLoading) showLoadingDialog() else closeLoadingDialog()
-        }
+        viewModel.apply {
+            // ローディングダイアログ
+            loading.observe(this@TranslationActivity) { isLoading ->
+                if (isLoading) showLoadingDialog() else closeLoadingDialog()
+            }
 
-        // エラーダイアログ
-        viewModel.showErrorDialogEvent.observe(this, EventObserver { errorMsg ->
-            showErrorDialog(errorMsg)
-        })
+            // エラーダイアログ
+            errorMsg.observe(this@TranslationActivity, EventObserver { errorMsg ->
+                showErrorDialog("check error log 'ERROR_TRANSLATE'\n" + errorMsg)
+            })
+        }
     }
 
     /**
@@ -102,22 +114,6 @@ class TranslationActivity : AppCompatActivity() {
         }
 
         startActivityForResult(intent, REQUEST_GALLERY)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_GALLERY -> {
-                viewModel.setImageUri(data?.data)
-            }
-            CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
-                val result: CropImage.ActivityResult? = CropImage.getActivityResult(data)
-                viewModel.setImageUri(result?.uri)
-            }
-            CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE -> {
-
-            }
-        }
     }
 
     private fun showLoadingDialog() =

@@ -8,7 +8,6 @@ import javax.inject.Singleton
 
 /**
  * DaggerでDIするためのViewModelFactoryをViewModelProviderから作る
- *
  */
 @Singleton
 class ViewModelFactory

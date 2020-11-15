@@ -1,7 +1,7 @@
 package com.example.visiontranslator.infra
 
-import com.example.visiontranslator.infra.repository.translations.TranslationsRepository
-import com.example.visiontranslator.infra.repository.translations.TranslationsRepositoryImpl
+import com.example.visiontranslator.infra.repository.translation.TranslationRepository
+import com.example.visiontranslator.infra.repository.translation.TranslationRepositoryImpl
 import com.example.visiontranslator.infra.service.ocr.OCRService
 import com.example.visiontranslator.infra.service.ocr.OCRServiceImpl
 import com.example.visiontranslator.infra.service.translate.TranslateService
@@ -29,8 +29,8 @@ abstract class InfraModule {
     @Singleton
     @Binds
     abstract fun bindsMainRepository(
-        repository: TranslationsRepositoryImpl
-    ): TranslationsRepository
+        repository: TranslationRepositoryImpl
+    ): TranslationRepository
 
     @Singleton
     @Binds

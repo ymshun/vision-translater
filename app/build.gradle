@@ -96,6 +96,9 @@ dependencies {
     // image crop
     implementation "com.theartofdev.edmodo:android-image-cropper:$imageCropperVersion"
 
+    // photo view
+    implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
+
     // material widget
     implementation "com.google.android.material:material:$materialVersion"
 
