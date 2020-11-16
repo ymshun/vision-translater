@@ -3,6 +3,7 @@ package com.example.visiontranslator.presentation.ui.preview
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +46,7 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         setupTranslationData()
+        setupEditText()
         setupDialog()
     }
 
@@ -56,6 +58,23 @@ class PreviewActivity : AppCompatActivity() {
 
         viewModel.previewTranslation.observe(this) {
             binding.previewTranslate.setText(it.translatedText)
+        }
+    }
+
+    /**
+     * 翻訳テキストを表示するEditTextの設定
+     */
+    private fun setupEditText() {
+        viewModel.editMode.observe(this) {
+            // キーボードの表示
+            if (!it) return@observe
+            binding.previewTranslate.isFocusableInTouchMode = it
+            binding.previewTranslate.requestFocus()
+            val inputMng = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMng.showSoftInput(
+                binding.previewTranslate,
+                InputMethodManager.SHOW_FORCED
+            )
         }
     }
 

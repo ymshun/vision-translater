@@ -11,4 +11,7 @@ class HomeUseCaseImpl
     override suspend fun getAllTranslations(): List<Translation> =
         translationsRepository.getAllTranslations()
 
+    override suspend fun findTranslationByQueryWord(queryWord: String): List<Translation> =
+        translationsRepository.findTranslationByQueryWord(queryWord)
+
 }

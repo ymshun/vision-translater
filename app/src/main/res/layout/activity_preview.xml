@@ -52,6 +52,21 @@
             app:srcCompat="@drawable/height"
             app:tint="@android:color/white" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeEditModeFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.5"
+            android:onClick="@{()->viewModel.changeEditMode()}"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@android:color/transparent"
+            app:srcCompat="@drawable/edit" />
+
         <ScrollView
             android:id="@+id/previewScrollView"
             android:layout_width="0dp"
@@ -68,7 +83,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
-                android:editable="false"
+                android:enabled="@{viewModel.editMode}"
+                android:focusable="@{viewModel.editMode}"
                 android:gravity="top"
                 android:paddingTop="18dp"
                 android:paddingBottom="16dp"

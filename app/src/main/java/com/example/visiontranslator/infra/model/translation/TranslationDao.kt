@@ -52,4 +52,10 @@ interface TranslationDao {
      */
     @Query("SELECT * FROM translations WHERE id =:id")
     suspend fun findTranslationByID(id: Long): Translation?
+
+    /**
+     * クエリワードから検索しリストとして検索結果を返す
+     */
+    @Query("SELECT * FROM translations WHERE translated_text LIKE '%' || :queryWord || '%' OR original_text LIKE '%' || :queryWord || '%'")
+    suspend fun findTranslationByQueryWord(queryWord: String) : List<Translation>
 }

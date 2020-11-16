@@ -31,9 +31,13 @@
                 app:contentScrim="@android:color/transparent"
                 app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
-                <SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
+                    app:queryHint="Search..."
+                    android:queryBackground="@android:color/transparent"
+                    android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
+                    app:searchHintIcon="@null"
                     android:layout_height="wrap_content"
                     android:elevation="7dp" />
 

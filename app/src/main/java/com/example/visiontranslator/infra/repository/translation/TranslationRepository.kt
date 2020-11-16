@@ -42,4 +42,9 @@ interface TranslationRepository {
      * IDからTranslationモデル取得
      */
     suspend fun findTranslationByID(id: Long): Translation?
+
+    /**
+     * 一覧からキーワード検索を行い結果をリストとして取得
+     */
+    suspend fun findTranslationByQueryWord(queryWord:String):List<Translation>
 }

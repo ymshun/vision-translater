@@ -14,9 +14,15 @@ class PreviewViewModel
     private val previewUseCase: PreviewUseCase
 ) : BaseViewModel(context.applicationContext) {
 
+    // プレビューに表示するTranslationモデル
     private val _previewTranslation = MutableLiveData<Translation>()
     val previewTranslation: LiveData<Translation>
         get() = _previewTranslation
+
+    // editTextのenableフラグ
+    private val _editMode = MutableLiveData<Boolean>(false)
+    val editMode: LiveData<Boolean>
+        get() = _editMode
 
     /**
      * プレビューに表示するデータを読み込む
@@ -28,4 +34,8 @@ class PreviewViewModel
         }
     }
 
+    // EditTextを編集可または編集不可に
+    fun changeEditMode() {
+        _editMode.value = !_editMode.value!!
+    }
 }

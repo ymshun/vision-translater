@@ -43,4 +43,9 @@ class TranslationRepositoryImpl
     override suspend fun findTranslationByID(id: Long) = withContext(Dispatchers.IO) {
         translationDao.findTranslationByID(id)
     }
+
+    override suspend fun findTranslationByQueryWord(queryWord: String) =
+        withContext(Dispatchers.IO) {
+            translationDao.findTranslationByQueryWord(queryWord)
+        }
 }

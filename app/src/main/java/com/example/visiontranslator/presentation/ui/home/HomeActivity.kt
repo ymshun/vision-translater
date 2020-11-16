@@ -46,8 +46,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         setupEpoxy()
+        setupSearchView()
         setupNavigation()
-
     }
 
     /**
@@ -62,7 +62,32 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 検索インターフェースの設定
+     */
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(
+            object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    binding.searchView.clearFocus()
+                    return true
+                }
 
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText == null || newText.trim() == "") {
+                        viewModel.loadTranslations()
+                    } else {
+                        viewModel.searchTranslation(newText)
+                    }
+                    return true
+                }
+            }
+        )
+    }
+
+    /**
+     * 画面遷移イベント定義
+     */
     private fun setupNavigation() {
         viewModel.openImageSelectEvent.observe(this, EventObserver {
             val intent = Intent(this, TranslationActivity::class.java)

@@ -35,8 +35,8 @@ class HomeViewModel
         get() = _openEditEvent
 
     // 翻訳データプレビュー画面遷移
-    private val _openPreviewEvent = MutableLiveData<Event<Int>>()
-    val openPreviewEvent: LiveData<Event<Int>>
+    private val _openPreviewEvent = MutableLiveData<Event<Long>>()
+    val openPreviewEvent: LiveData<Event<Long>>
         get() = _openPreviewEvent
 
     /**
@@ -48,7 +48,15 @@ class HomeViewModel
         }
     }
 
-    /** イベント通知系 **/
+    /**
+     * 検索インターフェースの設定
+     * TranslationModelから部分一致する検索結果を取得
+     */
+    fun searchTranslation(queryWord: String) {
+        processCall {
+            _translationList.value = homeUseCase.findTranslationByQueryWord(queryWord)
+        }
+    }
 
     // 画像選択画面
     fun openImageSelectEvent() {
@@ -66,7 +74,7 @@ class HomeViewModel
     }
 
     // プレビュー画面遷移、IDを渡す
-    fun openPreviewEvent(id: Int) {
+    fun openPreviewEvent(id: Long) {
         _openPreviewEvent.value = Event(id)
     }
 }
