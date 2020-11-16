@@ -64,8 +64,21 @@
             app:fabSize="mini"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@android:color/transparent"
             app:srcCompat="@drawable/edit" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeTranslatedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.5"
+            android:onClick="@{()->viewModel.changeTranslateText()}"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/repeat" />
 
         <ScrollView
             android:id="@+id/previewScrollView"
@@ -88,8 +101,9 @@
                 android:gravity="top"
                 android:paddingTop="18dp"
                 android:paddingBottom="16dp"
-                android:text="@{viewModel.previewTranslation.translatedText}"
                 android:textColor="@color/textColor"
+                app:isTranslatedText="@{viewModel.isTranslatedText}"
+                app:translationText="@{viewModel.previewTranslation}"
                 tools:text="翻訳です。テストケース" />
         </ScrollView>
     </androidx.constraintlayout.motion.widget.MotionLayout>

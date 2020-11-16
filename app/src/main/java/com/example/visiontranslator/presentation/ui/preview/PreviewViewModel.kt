@@ -20,9 +20,14 @@ class PreviewViewModel
         get() = _previewTranslation
 
     // editTextのenableフラグ
-    private val _editMode = MutableLiveData<Boolean>(false)
+    private val _editMode = MutableLiveData(false)
     val editMode: LiveData<Boolean>
         get() = _editMode
+
+    // editTextに表示するテキストが translatedText か originalTextどうかのフラグ
+    private val _isTranslatedText = MutableLiveData(true)
+    val isTranslatedText: LiveData<Boolean>
+        get() = _isTranslatedText
 
     /**
      * プレビューに表示するデータを読み込む
@@ -37,5 +42,10 @@ class PreviewViewModel
     // EditTextを編集可または編集不可に
     fun changeEditMode() {
         _editMode.value = !_editMode.value!!
+    }
+
+    // 翻訳済みのテキストとオリジナルの翻訳前のOCR検出したテキストを切り替える
+    fun changeTranslateText() {
+        _isTranslatedText.value = !_isTranslatedText.value!!
     }
 }
