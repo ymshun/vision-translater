@@ -47,4 +47,9 @@ interface TranslationRepository {
      * 一覧からキーワード検索を行い結果をリストとして取得
      */
     suspend fun findTranslationByQueryWord(queryWord:String):List<Translation>
+
+    /**
+     * テスト用のTranslationモデルを生成
+     */
+    fun getTranslationForTestCase(): Translation
 }

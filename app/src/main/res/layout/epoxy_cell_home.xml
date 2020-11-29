@@ -10,10 +10,6 @@
             type="com.example.visiontranslator.infra.model.translation.Translation" />
 
         <variable
-            name="src"
-            type="android.net.Uri" />
-
-        <variable
             name="viewModel"
             type="com.example.visiontranslator.presentation.ui.home.HomeViewModel" />
     </data>
@@ -24,9 +20,9 @@
         android:layout_height="190dp"
         android:layout_margin="3dp"
         android:elevation="4dp"
+        android:foreground="@drawable/click_back"
         android:onClick="@{()->viewModel.openPreviewEvent(translation.id)}"
         app:cardCornerRadius="4dp"
-        android:foreground="@drawable/click_back"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                android:src="@drawable/testcase1" />
+                app:glideSrc="@{translation.imgUri}" />
 
             <TextView
                 android:id="@+id/textView"

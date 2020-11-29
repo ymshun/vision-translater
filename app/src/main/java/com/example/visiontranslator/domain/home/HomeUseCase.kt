@@ -20,4 +20,9 @@ interface HomeUseCase {
      * idからTranslation モデルを削除
      */
     suspend fun deleteTranslations(translationIdList: List<Long>)
+
+    /**
+     * テスト用のTranslationモデルを生成し保存
+     */
+    suspend fun insertTranslationTestCase()
 }

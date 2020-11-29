@@ -1,7 +1,6 @@
 package com.example.visiontranslator.presentation.ui.home
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.visiontranslator.domain.home.HomeUseCase
@@ -46,7 +45,7 @@ class HomeViewModel
      */
     fun loadTranslations() {
         processCall {
-            _translationList.value = homeUseCase.getAllTranslations()
+            _translationList.postValue(homeUseCase.getAllTranslations())
         }
     }
 
@@ -66,9 +65,12 @@ class HomeViewModel
     }
 
     // テストデータの入力
-    fun openSettingEvent() {
+    fun insertTestCaseEvent() {
         processCall {
-
+            for (i in 0 until 4) {
+                homeUseCase.insertTranslationTestCase()
+            }
+            _translationList.postValue(homeUseCase.getAllTranslations())
         }
     }
 

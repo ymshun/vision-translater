@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.visiontranslator.AppApplication
 import com.example.visiontranslator.R
 import com.example.visiontranslator.databinding.ActivityHomeBinding
+import com.example.visiontranslator.presentation.ui.dialog.ErrorDialog
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.presentation.ui.translation.TranslationActivity
 import com.example.visiontranslator.util.EventObserver
@@ -50,6 +51,7 @@ class HomeActivity : AppCompatActivity() {
         setupEpoxy()
         setupSearchView()
         setupNavigation()
+        setupDialog()
     }
 
     /**
@@ -113,8 +115,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     /**
+     * ダイアログの設定
+     */
+    private fun setupDialog() {
+        viewModel.errorMsg.observe(this, EventObserver { errorMsg ->
+            showErrorDialog("check error log 'HOME_ACTIVITY'\\n" + errorMsg)
+        })
+    }
+
+    /**
      * ローカルからTranslationListを取得しなおしてビューを更新
      */
     private fun refreshTranslationList() = viewModel.loadTranslations()
+
+    private fun showErrorDialog(errorMsg: String) =
+        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
+
 
 }

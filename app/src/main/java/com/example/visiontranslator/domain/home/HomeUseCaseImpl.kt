@@ -23,5 +23,8 @@ class HomeUseCaseImpl
     override suspend fun deleteTranslations(translationIdList: List<Long>) =
         translationsRepository.deleteTranslations(translationIdList)
 
-
+    override suspend fun insertTranslationTestCase() {
+        val testcase = translationsRepository.getTranslationForTestCase()
+        translationsRepository.insertTranslation(testcase)
+    }
 }
