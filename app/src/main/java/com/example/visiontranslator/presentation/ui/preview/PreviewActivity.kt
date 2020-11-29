@@ -3,6 +3,8 @@ package com.example.visiontranslator.presentation.ui.preview
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -41,23 +43,46 @@ class PreviewActivity : AppCompatActivity() {
         AppApplication.component.inject(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preview)
         binding.let {
+            lifecycle.addObserver(viewModel)
             it.lifecycleOwner = this@PreviewActivity
             it.viewModel = viewModel
         }
 
+        setupToolbar()
         setupTranslationData()
         setupEditText()
         setupDialog()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+//            android.R.id.home -> viewModel.updatePreviewTranslation()
+        }
+        return true
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.previewToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     /**
      * preview画面に翻訳データを反映
      */
     private fun setupTranslationData() {
-        viewModel.loadPreviewTranslation(translationId)
+        if (viewModel.previewTranslation.value == null) {
+            viewModel.loadPreviewTranslation(translationId)
+        }
 
         viewModel.previewTranslation.observe(this) {
-            binding.previewTranslate.setText(it.translatedText)
+            Log.d("test77",it.toString())
+            binding.previewTranslateText.setText(it.translatedText)
+        }
+        viewModel.isTranslatedText.observe(this) {
+            viewModel.previewTranslation.value?.apply {
+//                binding.previewTranslate.setText(if (it) translatedText else originalText)
+            }
         }
     }
 
@@ -68,13 +93,17 @@ class PreviewActivity : AppCompatActivity() {
         viewModel.editMode.observe(this) {
             // キーボードの表示
             if (!it) return@observe
-            binding.previewTranslate.isFocusableInTouchMode = it
-            binding.previewTranslate.requestFocus()
-            val inputMng = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMng.showSoftInput(
-                binding.previewTranslate,
-                InputMethodManager.SHOW_FORCED
-            )
+            if (viewModel.isTranslatedText.value!!) {
+                binding.previewTranslateText.isFocusableInTouchMode = it
+                binding.previewTranslateText.requestFocus()
+                val inputMng = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMng.showSoftInput(binding.previewTranslateText, InputMethodManager.SHOW_FORCED)
+            } else {
+                binding.previewOriginalText.isFocusableInTouchMode = it
+                binding.previewOriginalText.requestFocus()
+                val inputMng = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMng.showSoftInput(binding.previewOriginalText, InputMethodManager.SHOW_FORCED)
+            }
         }
     }
 

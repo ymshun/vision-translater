@@ -14,5 +14,10 @@ interface HomeUseCase {
     /**
      * 一覧からキーワード検索を行い結果をリストとして取得
      */
-    suspend fun findTranslationByQueryWord(queryWord:String):List<Translation>
+    suspend fun findTranslationByQueryWord(queryWord: String): List<Translation>
+
+    /**
+     * idからTranslation モデルを削除
+     */
+    suspend fun deleteTranslations(translationIdList: List<Long>)
 }

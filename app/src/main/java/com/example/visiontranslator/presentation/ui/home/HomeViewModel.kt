@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.visiontranslator.domain.home.HomeUseCase
 import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.presentation.ui.base.BaseViewModel
+import com.example.visiontranslator.util.ConstantKey.ViewModelTab.HOME_VIEWMODEL
 import com.example.visiontranslator.util.Event
 import javax.inject.Inject
 
@@ -13,7 +14,7 @@ class HomeViewModel
 @Inject constructor(
     context: Context,
     private val homeUseCase: HomeUseCase
-) : BaseViewModel(context.applicationContext) {
+) : BaseViewModel(context.applicationContext, HOME_VIEWMODEL) {
 
     private val _translationList = MutableLiveData<List<Translation>>()
     val translationList: LiveData<List<Translation>>

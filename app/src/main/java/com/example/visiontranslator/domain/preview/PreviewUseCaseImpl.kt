@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * UseCaseは今プロジェクトにおいては画面単位で作成する
  *
- * プレビュー画面PreviewActivityで使用するuseCase
+ * プレビュー画面PreviewActivityで使用するuseCaseを実装したクラス
  */
 class PreviewUseCaseImpl
 @Inject constructor(
@@ -19,4 +19,7 @@ class PreviewUseCaseImpl
      */
     override suspend fun findTranslationById(id: Long): Translation? =
         translationRepository.findTranslationByID(id)
+
+    override suspend fun updateTranslation(translation: Translation) =
+        translationRepository.updateTranslation(translation)
 }

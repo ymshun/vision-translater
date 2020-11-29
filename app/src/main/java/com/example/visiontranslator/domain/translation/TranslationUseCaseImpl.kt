@@ -10,7 +10,7 @@ import javax.inject.Inject
 /**
  * UseCaseは今プロジェクトにおいては画面単位で作成する
  *
- * 翻訳画面TranslationActivityで使用するuse case
+ * 翻訳画面TranslationActivityで使用するuseCaseを実装したクラス
  */
 class TranslationUseCaseImpl
 @Inject constructor(

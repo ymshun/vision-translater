@@ -41,6 +41,7 @@ class TranslationActivity : AppCompatActivity() {
         AppApplication.component.inject(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_translation)
         binding.let {
+            lifecycle.addObserver(viewModel)
             it.lifecycleOwner = this@TranslationActivity
             it.viewmodel = viewModel
         }

@@ -2,10 +2,7 @@ package com.example.visiontranslator.presentation.ui.base
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.visiontranslator.util.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -16,8 +13,9 @@ import kotlinx.coroutines.launch
  * suspend関数を作ってコルーチンを使うときはsuspend関数をメインセーフティにすること
  */
 abstract class BaseViewModel(
-    private val applicationContext: Context
-) : ViewModel() {
+    private val applicationContext: Context,
+    private val viewModelName: String
+) : ViewModel(), LifecycleObserver {
     // APIリクエストなどのコルーチンのローディングフラグ
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
@@ -40,7 +38,7 @@ abstract class BaseViewModel(
                 suspendCall.invoke()
             } catch (e: Exception) {
                 _errorMsg.value = Event(e.message.toString())
-                Log.e("process call error", "${e.stackTrace}")
+                Log.e("process call error at $viewModelName", e.stackTraceToString())
             } finally {
                 _loading.value = false
             }

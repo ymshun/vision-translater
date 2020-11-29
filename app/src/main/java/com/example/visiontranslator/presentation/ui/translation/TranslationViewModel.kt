@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.visiontranslator.domain.translation.TranslationUseCase
 import com.example.visiontranslator.presentation.ui.base.BaseViewModel
+import com.example.visiontranslator.util.ConstantKey.ViewModelTab.TRANSLATION_VIEWMODEL
 import com.example.visiontranslator.util.Event
 import permissions.dispatcher.NeedsPermission
 import javax.inject.Inject
@@ -15,7 +16,7 @@ class TranslationViewModel
 @Inject constructor(
     context: Context,
     private val translateUseCase: TranslationUseCase,
-) : BaseViewModel(context.applicationContext) {
+) : BaseViewModel(context.applicationContext, TRANSLATION_VIEWMODEL) {
 
     // ギャラリーから取得した写真のUri
     private val _imageUri = MutableLiveData<Uri>()
@@ -67,31 +68,10 @@ class TranslationViewModel
         _imageUri.value ?: return
         processCall {
             val id = translateUseCase.translateText(_imageUri.value!!)
-//            val id = 14L
             _translationId.postValue(id)
             openPreviewEvent(id)
         }
     }
-
-
-//    fun translate() = viewModelScope.launch {
-//        if (_loading.value == true) return@launch
-//
-//        try {
-//            withTimeout(15000) {
-//                _loading.postValue(true)
-//                val id = translateUseCase.translateText(_imageUri.value!!)
-//                val id = 14L
-//                _translationId.postValue(id)
-//                openPreviewEvent(id)
-//            }
-//        } catch (e: Exception) {
-//            showErrorDialog("check error log 'ERROR_TRANSLATE'\n" + e.message.toString())
-//            Log.e("ERROR_TRANSLATE", e.stackTraceToString())
-//        } finally {
-//            _loading.postValue(false)
-//        }
-//    }
 
     /** イベント通知関連 **/
 

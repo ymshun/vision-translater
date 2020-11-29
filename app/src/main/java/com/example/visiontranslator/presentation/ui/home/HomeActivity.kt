@@ -41,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
         // Data Binding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.let {
+            lifecycle.addObserver(viewModel)
             it.lifecycleOwner = this@HomeActivity
             it.viewmodel = viewModel
         }
@@ -90,22 +91,22 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupNavigation() {
         viewModel.openImageSelectEvent.observe(this, EventObserver {
-            val intent = Intent(this, TranslationActivity::class.java)
+            val intent =TranslationActivity.createIntent(this)
             startActivity(intent)
         })
 
         viewModel.openEditEvent.observe(this, EventObserver {
-            val intent = Intent(this, TranslationActivity::class.java)
+            val intent =TranslationActivity.createIntent(this)
             startActivity(intent)
         })
 
         viewModel.openSettingEvent.observe(this, EventObserver {
-            val intent = Intent(this, TranslationActivity::class.java)
+            val intent =TranslationActivity.createIntent(this)
             startActivity(intent)
         })
 
         viewModel.openPreviewEvent.observe(this, EventObserver {
-            val intent = Intent(this, PreviewActivity::class.java)
+            val intent = PreviewActivity.createIntent(this, it)
             startActivity(intent)
         })
     }

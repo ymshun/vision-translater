@@ -4,6 +4,12 @@ import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.infra.repository.translation.TranslationRepository
 import javax.inject.Inject
 
+/**
+ * UseCaseは今プロジェクトにおいては画面単位で作成する
+ *
+ * ホーム画面HomeActivityで使用するuseCaseを実装したクラス
+ * リスト表示をする画面
+ */
 class HomeUseCaseImpl
 @Inject constructor(
     private val translationsRepository: TranslationRepository
@@ -13,5 +19,9 @@ class HomeUseCaseImpl
 
     override suspend fun findTranslationByQueryWord(queryWord: String): List<Translation> =
         translationsRepository.findTranslationByQueryWord(queryWord)
+
+    override suspend fun deleteTranslations(translationIdList: List<Long>) =
+        translationsRepository.deleteTranslations(translationIdList)
+
 
 }

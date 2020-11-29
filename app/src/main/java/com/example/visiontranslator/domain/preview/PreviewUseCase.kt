@@ -11,4 +11,9 @@ interface PreviewUseCase {
      * @return Translationモデル 存在しなければnull
      */
     suspend fun findTranslationById(id: Long): Translation?
+
+    /**
+     * Translationモデルをアップデート
+     */
+    suspend fun updateTranslation(translation: Translation)
 }

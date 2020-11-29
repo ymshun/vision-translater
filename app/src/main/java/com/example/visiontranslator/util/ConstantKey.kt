@@ -19,6 +19,12 @@ object ConstantKey {
 
     }
 
+    object ViewModelTab{
+        const val HOME_VIEWMODEL = "homeViewModel"
+        const val PREVIEW_VIEWMODEL = "previewViewModel"
+        const val TRANSLATION_VIEWMODEL = "translationViewModel"
+    }
+
     /**
      * intentのextraタグ
      */
@@ -34,8 +40,7 @@ object ConstantKey {
     }
 
     object ErrorMsg {
-        // 本当はこういうstringはリソースファイルかconfigの方だが
-        // contextの取得が面倒なので今回はここに
+        // 本当はこういうstringはリソースファイルかconfigの方だが今回はここで一括管理
         const val ERROR_GOOGLE_VISION_API =
             "Error: Response of Google Vision API.\nMaybe API Service already have finished."
         const val ERROR_GAS_REQUEST_ERROR = "ERROR: Response of GAS API."

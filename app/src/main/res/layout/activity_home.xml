@@ -70,12 +70,14 @@
                 app:srcCompat="@drawable/edit"
                 app:tint="@android:color/white" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/settingFab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="3dp"
-                android:layout_marginBottom="16dp"
+                android:text="テストデータ入力"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="12dp"
                 android:onClick="@{()->viewmodel.openSettingEvent()}"
                 app:srcCompat="@drawable/settings"
                 app:tint="@android:color/white" />

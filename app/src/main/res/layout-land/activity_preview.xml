@@ -17,6 +17,17 @@
         tools:context=".presentation.ui.preview.PreviewActivity"
         tools:showPaths="true">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/previewToolbar"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/toolbarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@android:color/white" />
+
         <View
             android:id="@+id/border"
             android:layout_width="3dp"
@@ -25,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/borderNav"
@@ -47,12 +58,14 @@
             android:id="@+id/changeEditModeFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:alpha="0.5"
             android:onClick="@{()->viewModel.changeEditMode()}"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/changeTranslatedText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/edit" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -76,33 +89,57 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/border"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/previewToolbar"
             app:srcCompat="@drawable/testcase1" />
 
         <ScrollView
-            android:id="@+id/previewScrollView"
+            android:id="@+id/previewTranslateScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:isVisible="@{viewModel.isTranslatedText}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/border"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/previewToolbar">
 
-            <EditText
-                android:id="@+id/previewTranslate"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:enabled="@{viewModel.editMode}"
-                android:focusable="@{viewModel.editMode}"
-                android:paddingStart="24dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/textColor"
-                app:isTranslatedText="@{viewModel.isTranslatedText}"
-                app:translationText="@{viewModel.previewTranslation}"
-                tools:text="翻訳です。テストケース。。。。(editorでのみ表示)" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/previewTranslateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:enabled="@{viewModel.editMode &amp;&amp; viewModel.isTranslatedText}"
+                    android:focusable="@{viewModel.editMode &amp;&amp; viewModel.isTranslatedText}"
+                    android:paddingStart="24dp"
+                    android:paddingBottom="8dp"
+                    android:text="@={viewModel.previewTranslation.translatedText}"
+                    android:textColor="@color/textColor"
+                    app:isVisibleGone="@{viewModel.isTranslatedText}"
+                    tools:text="翻訳です。テストケース。。。。(editorでのみ表示)" />
+
+                <EditText
+                    android:id="@+id/previewOriginalText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:enabled="@{viewModel.editMode &amp;&amp; viewModel.isTranslatedText}"
+                    android:focusable="@{viewModel.editMode &amp;&amp; viewModel.isTranslatedText}"
+                    android:paddingStart="24dp"
+                    android:paddingBottom="8dp"
+                    android:text="@={viewModel.previewTranslation.originalText}"
+                    android:textColor="@color/textColor"
+                    app:isVisibleGone="@{!viewModel.isTranslatedText}"
+                    tools:text="翻訳です。テストケース。。。。(editorでのみ表示)"
+                    tools:visibility="gone" />
+            </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
