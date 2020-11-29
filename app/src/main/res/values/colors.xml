@@ -11,4 +11,5 @@
     <color name="clickBackground">#14000000</color>
 
     <color name="textColor">#515151</color>
+    <color name="alphaWhite">#5EFFFFFF</color>
 </resources>

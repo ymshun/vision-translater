@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_dark_background"
-        android:onClick="@{()->viewmodel.onClickDisplay()}"
         tools:context=".presentation.ui.translation.TranslationActivity">
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -24,6 +23,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:alpha="0.75"
+            android:onClick="@{()->viewmodel.showTestCaseEvent()}"
             android:text="テストケース"
             android:textColor="@android:color/white"
             app:icon="@drawable/photo"
@@ -63,10 +63,11 @@
             app:srcCompat="@drawable/filter"
             app:tint="@android:color/white" />
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/translateImg"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:onClick="@{()->viewmodel.onClickDisplay()}"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_launcher_background"
             app:glideSrc="@{viewmodel.imageUri}"
@@ -79,8 +80,8 @@
             android:id="@+id/translateBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/translate"
             android:onClick="@{()->viewmodel.translate()}"
+            android:text="@string/translate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

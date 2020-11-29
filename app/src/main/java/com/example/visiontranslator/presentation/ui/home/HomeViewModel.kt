@@ -1,6 +1,7 @@
 package com.example.visiontranslator.presentation.ui.home
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.visiontranslator.domain.home.HomeUseCase
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class HomeViewModel
 @Inject constructor(
-    context: Context,
+    private val context: Context,
     private val homeUseCase: HomeUseCase
 ) : BaseViewModel(context.applicationContext, HOME_VIEWMODEL) {
 
@@ -26,9 +27,9 @@ class HomeViewModel
         get() = _openImageSelectEvent
 
     // 設定画面遷移
-    private val _openSettingEvent = MutableLiveData<Event<Unit>>()
-    val openSettingEvent: LiveData<Event<Unit>>
-        get() = _openSettingEvent
+    private val _insertTestcaseEvent = MutableLiveData<Event<Unit>>()
+    val insertTestcaseEvent: LiveData<Event<Unit>>
+        get() = _insertTestcaseEvent
 
     // 文字入力画面遷移
     private val _openEditEvent = MutableLiveData<Event<Unit>>()
@@ -64,9 +65,11 @@ class HomeViewModel
         _openImageSelectEvent.value = Event(Unit)
     }
 
-    // 設定画面
+    // テストデータの入力
     fun openSettingEvent() {
-        _openSettingEvent.value = Event(Unit)
+        processCall {
+
+        }
     }
 
     // 編集画面

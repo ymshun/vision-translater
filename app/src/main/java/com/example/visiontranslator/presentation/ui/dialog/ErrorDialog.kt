@@ -13,17 +13,11 @@ import com.example.visiontranslator.util.ConstantKey.DialogTag.DIALOG_ERROR
  */
 class ErrorDialog : DialogFragment() {
 
-    private var listener: ErrorDialogListener? = null
-
-    private val errorMsg by lazy {
-        arguments?.getString(ERROR_MSG)
-    }
-
     companion object {
         private val newInstance = ErrorDialog()
 
         @JvmStatic
-        fun newInstance(
+        fun showDialog(
             fm: FragmentManager,
             tag: String = DIALOG_ERROR,
             errorMsg: String
@@ -48,7 +42,13 @@ class ErrorDialog : DialogFragment() {
     }
 
     interface ErrorDialogListener {
-        fun onClickPosBtn()
+        fun onClickPosBtn(from: ErrorDialog)
+    }
+
+    private var listener: ErrorDialogListener? = null
+
+    private val errorMsg by lazy {
+        arguments?.getString(ERROR_MSG)
     }
 
     override fun onAttach(context: Context) {
@@ -68,10 +68,9 @@ class ErrorDialog : DialogFragment() {
             builder.setTitle("ERROR")
                 .setMessage(errorMsg)
                 .setPositiveButton("OK") { dialog, _ ->
-                    listener?.onClickPosBtn()
+                    listener?.onClickPosBtn(this@ErrorDialog)
                 }
                 .create()
         } ?: throw IllegalStateException("Activity not found")
-
     }
 }

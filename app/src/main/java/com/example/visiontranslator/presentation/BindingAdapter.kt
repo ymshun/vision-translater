@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
 import com.bumptech.glide.Glide
 import com.example.visiontranslator.infra.model.translation.Translation
 
@@ -24,10 +23,16 @@ fun ImageView.setImageSrcURI(src: Uri?) {
     Glide.with(this.context).load(src).into(this)
 }
 
+@BindingAdapter("app:glideSrc")
+fun ImageView.setImageSrcDrawableId(drawableId: Int?) {
+    Glide.with(this.context).load(drawableId).into(this)
+}
+
 @BindingAdapter("app:isVisible")
 fun View.isVisible(isVisible: Boolean) {
     this.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
 }
+
 @BindingAdapter("app:isVisibleGone")
 fun View.isVisibleGone(isVisible: Boolean) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE

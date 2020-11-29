@@ -33,6 +33,11 @@ class TranslationViewModel
     val showGalleryEvent: LiveData<Event<Unit>>
         get() = _showGalleryEvent
 
+    // テストデータ選択ダイアログ表示イベント
+    private val _showTestCaseEvent = MutableLiveData<Event<Unit>>()
+    val showTestCaseEvent: LiveData<Event<Unit>>
+        get() = _showTestCaseEvent
+
     // 画像切り抜きイベント
     private val _openCropEvent = MutableLiveData<Event<Unit>>()
     val openCropEvent: LiveData<Event<Unit>>
@@ -73,12 +78,17 @@ class TranslationViewModel
         }
     }
 
-    /** イベント通知関連 **/
-
+    // 画像選択のギャラリー表示
     fun showGalleryEvent() {
         _showGalleryEvent.value = Event(Unit)
     }
 
+    // テストデータの選択をするためにダイアログを表示
+    fun showTestCaseEvent() {
+        _showTestCaseEvent.value = Event(Unit)
+    }
+
+    // 画像切り抜き画面の表示
     fun openCropEvent() {
         _openCropEvent.value = Event(Unit)
     }

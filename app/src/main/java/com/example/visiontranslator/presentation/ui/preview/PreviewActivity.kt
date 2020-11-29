@@ -3,7 +3,6 @@ package com.example.visiontranslator.presentation.ui.preview
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +56,6 @@ class PreviewActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
-//            android.R.id.home -> viewModel.updatePreviewTranslation()
         }
         return true
     }
@@ -76,7 +74,6 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         viewModel.previewTranslation.observe(this) {
-            Log.d("test77",it.toString())
             binding.previewTranslateText.setText(it.translatedText)
         }
         viewModel.isTranslatedText.observe(this) {
@@ -117,5 +114,6 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     private fun showErrorDialog(errorMsg: String) =
-        ErrorDialog.newInstance(supportFragmentManager, errorMsg = errorMsg)
+        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
+
 }

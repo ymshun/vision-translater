@@ -1,8 +1,11 @@
 package com.example.visiontranslator.presentation.ui.translation
 
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +14,7 @@ import com.example.visiontranslator.R
 import com.example.visiontranslator.databinding.ActivityTranslationBinding
 import com.example.visiontranslator.presentation.ui.dialog.ErrorDialog
 import com.example.visiontranslator.presentation.ui.dialog.LoadingTransparentDialog
+import com.example.visiontranslator.presentation.ui.dialog.testcasedialog.TestCaseDialog
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.util.ConstantKey.RequestCode.REQUEST_GALLERY
 import com.example.visiontranslator.util.EventObserver
@@ -19,7 +23,9 @@ import permissions.dispatcher.RuntimePermissions
 import javax.inject.Inject
 
 @RuntimePermissions
-class TranslationActivity : AppCompatActivity() {
+class TranslationActivity : AppCompatActivity(),
+    TestCaseDialog.TestCaseDialogListener,
+    ErrorDialog.ErrorDialogListener {
 
     companion object {
         @JvmStatic
@@ -85,6 +91,10 @@ class TranslationActivity : AppCompatActivity() {
      */
     private fun setupDialog() {
         viewModel.apply {
+            showTestCaseEvent.observe(this@TranslationActivity, EventObserver {
+                showTestCaseDialog()
+            })
+
             // ローディングダイアログ
             loading.observe(this@TranslationActivity) { isLoading ->
                 if (isLoading) showLoadingDialog() else closeLoadingDialog()
@@ -117,6 +127,8 @@ class TranslationActivity : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_GALLERY)
     }
 
+    private fun showTestCaseDialog() = TestCaseDialog.showDialog(supportFragmentManager)
+
     private fun showLoadingDialog() =
         LoadingTransparentDialog.showDialog(supportFragmentManager)
 
@@ -124,5 +136,18 @@ class TranslationActivity : AppCompatActivity() {
         LoadingTransparentDialog.closeDialog(supportFragmentManager)
 
     private fun showErrorDialog(errorMsg: String) =
-        ErrorDialog.newInstance(supportFragmentManager, errorMsg = errorMsg)
+        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
+
+    override fun onClickTestImg(from: TestCaseDialog, drawableResId: Int) {
+        val uri = Uri.parse(
+            "${ContentResolver.SCHEME_ANDROID_RESOURCE}://" +
+                    "${resources.getResourcePackageName(drawableResId)}/" +
+                    "${resources.getResourceTypeName(drawableResId)}/" +
+                    resources.getResourceEntryName(drawableResId)
+        )
+        viewModel.setImageUri(uri)
+    }
+
+    override fun onClickPosBtn(from: ErrorDialog) {
+    }
 }

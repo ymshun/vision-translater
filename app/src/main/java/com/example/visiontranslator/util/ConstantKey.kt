@@ -9,6 +9,7 @@ object ConstantKey {
      */
     object DialogTag {
         const val DIALOG_LOADING = "DIALOG_LOADING"
+        const val DIALOG_TESTCASE = "DIALOG_TESTCASE"
         const val DIALOG_ERROR = "DIALOG_ERROR"
     }
 

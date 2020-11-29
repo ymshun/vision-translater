@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Vision Translator</string>
     <string name="translate">翻訳</string>
+
+    <!--  navigation  -->
+    <string name="testDataNav">次の画面でテスト用の画像を入力することもできます</string>
 </resources>

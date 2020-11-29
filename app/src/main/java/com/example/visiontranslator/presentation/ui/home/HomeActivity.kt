@@ -3,6 +3,7 @@ package com.example.visiontranslator.presentation.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -91,18 +92,18 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupNavigation() {
         viewModel.openImageSelectEvent.observe(this, EventObserver {
-            val intent =TranslationActivity.createIntent(this)
+            Toast.makeText(this, R.string.testDataNav, Toast.LENGTH_LONG).show()
+            val intent = TranslationActivity.createIntent(this)
             startActivity(intent)
         })
 
         viewModel.openEditEvent.observe(this, EventObserver {
-            val intent =TranslationActivity.createIntent(this)
+            val intent = TranslationActivity.createIntent(this)
             startActivity(intent)
         })
 
-        viewModel.openSettingEvent.observe(this, EventObserver {
-            val intent =TranslationActivity.createIntent(this)
-            startActivity(intent)
+        viewModel.insertTestcaseEvent.observe(this, EventObserver {
+
         })
 
         viewModel.openPreviewEvent.observe(this, EventObserver {
