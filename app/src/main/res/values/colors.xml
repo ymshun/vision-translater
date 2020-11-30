@@ -10,6 +10,7 @@
     <color name="grayBackground">#0D000000</color>
     <color name="clickBackground">#14000000</color>
 
-    <color name="textColor">#515151</color>
+    <color name="textColor">#434343</color>
+    <color name="invalidTextColor">#7C7C7C</color>
     <color name="alphaWhite">#5EFFFFFF</color>
 </resources>

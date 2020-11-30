@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.preview.PreviewTranslatedTextFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.visiontranslator.presentation.ui.preview.PreviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeEditModeFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.5"
+            android:onClick="@{()->viewModel.changeEditModeTranslatedText()}"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="mini"
+            app:isVisible="@{viewModel.isShowControlBtn}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/edit" />
+
+        <ScrollView
+            android:id="@+id/previewTranslateScrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/previewTranslateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:enabled="@{viewModel.editModeTranslatedText}"
+                android:focusable="@{viewModel.editModeTranslatedText}"
+                android:gravity="top"
+                android:paddingTop="18dp"
+                android:paddingBottom="16dp"
+                android:text="@={viewModel.previewTranslation.originalText}"
+                android:textColor="@{viewModel.editModeTranslatedText ? @color/textColor : @color/invalidTextColor}"
+                tools:text="翻訳です。テストケース" />
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

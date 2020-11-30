@@ -8,16 +8,18 @@ object ConstantKey {
      * ダイアログのタグ
      */
     object DialogTag {
-        const val DIALOG_LOADING = "DIALOG_LOADING"
-        const val DIALOG_TESTCASE = "DIALOG_TESTCASE"
-        const val DIALOG_ERROR = "DIALOG_ERROR"
+        const val DIALOG_LOADING = "dialogLoading"
+        const val DIALOG_TESTCASE = "dialogTestcase"
+        const val DIALOG_ERROR = "dialogError"
     }
 
     /**
      * フラグメントのタグ
      */
     object FragmentTag {
-
+        const val FRAGMENT_PREVIEW_ORIGINAL_TEXT = "fragmentPreviewOriginalText"
+        const val FRAGMENT_PREVIEW_TRANSLATED_TEXT = "fragmentPreviewTranslatedText"
+        const val FRAGMENT_PREVIEW_IMG = "fragmentPreviewImg"
     }
 
     object ViewModelTab{
@@ -30,7 +32,7 @@ object ConstantKey {
      * intentのextraタグ
      */
     object IntentExtraTag {
-        const val INTENT_SELECTED_ID = "INTENT_SELECTED_ID"
+        const val INTENT_SELECTED_ID = "intentSelectedId"
     }
 
     /**

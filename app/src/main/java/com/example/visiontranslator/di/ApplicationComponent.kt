@@ -6,6 +6,9 @@ import com.example.visiontranslator.infra.model.DataSourceModule
 import com.example.visiontranslator.presentation.ViewModelModule
 import com.example.visiontranslator.presentation.ui.home.HomeActivity
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
+import com.example.visiontranslator.presentation.ui.preview.PreviewImgFragment
+import com.example.visiontranslator.presentation.ui.preview.PreviewOriginalTextFragment
+import com.example.visiontranslator.presentation.ui.preview.PreviewTranslatedTextFragment
 import com.example.visiontranslator.presentation.ui.translation.TranslationActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -23,13 +26,17 @@ import javax.inject.Singleton
         InfraModule::class,
         DataSourceModule::class,
         DomainModule::class
-//            xxxModule::class
+        // xxxModule::class
     ]
 )
 interface ApplicationComponent {
     fun inject(activity: HomeActivity)
     fun inject(activity: TranslationActivity)
     fun inject(activity: PreviewActivity)
+    // fun inject(activity: xxxActivity)
 
-//    fun inject(fragment:xxxFragment)
+    fun inject(fragment: PreviewImgFragment)
+    fun inject(fragment: PreviewOriginalTextFragment)
+    fun inject(fragment: PreviewTranslatedTextFragment)
+    // fun inject(fragment: xxxFragment)
 }
