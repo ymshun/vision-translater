@@ -22,6 +22,5 @@ class TestCaseEpoxyController(
         }
     }
 
-    fun onClickTestImg(clickedDrawableResId: Int) =
-        clickTestImgListener.onClickTestImg(clickedDrawableResId)
+    fun onClickTestImg(clickedDrawableResId: Int) = clickTestImgListener.onClickTestImg(clickedDrawableResId)
 }

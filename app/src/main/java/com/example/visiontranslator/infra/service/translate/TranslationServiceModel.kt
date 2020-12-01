@@ -27,8 +27,7 @@ enum class TranslationServiceStatusCode(val code: Int?) {
      */
     companion object {
         fun fromCode(code: Int?): TranslationServiceStatusCode =
-            values().firstOrNull { it.code == code }
-                ?: HTTP_STATUS_ERROR
+            values().firstOrNull { it.code == code } ?: HTTP_STATUS_ERROR
     }
 
 }

@@ -19,6 +19,11 @@ import com.example.visiontranslator.util.ConstantKey.IntentExtraTag
 import com.example.visiontranslator.util.EventObserver
 import javax.inject.Inject
 
+/**
+ * Previewを表示するactivity
+ * 複数のフラグメントがアタッチされる
+ * フラグメントは同じviewModelでデータ等共有
+ */
 class PreviewActivity : AppCompatActivity() {
 
     companion object {
@@ -35,19 +40,18 @@ class PreviewActivity : AppCompatActivity() {
         ViewModelProvider(this, viewModelFactory).get(PreviewViewModel::class.java)
     }
 
+    // intentでpreviewに表示するモデルのIDを取得
     private val translationId: Long by lazy {
         intent.getLongExtra(IntentExtraTag.INTENT_SELECTED_ID, 1L)
     }
     private lateinit var binding: ActivityPreviewBinding
 
-    private fun getPreviewImgFragment() =
-        supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_IMG) as? PreviewImgFragment
-
-    private fun getPreviewOriginalTextFragment() =
-        supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_ORIGINAL_TEXT) as? PreviewOriginalTextFragment
-
-    private fun getPreviewTranslatedTextFragment() =
-        supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_TRANSLATED_TEXT) as? PreviewTranslatedTextFragment
+    private val previewFragment
+        get() = supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_IMG) as? PreviewImgFragment
+    private val previewOriginalTextFragment
+        get() = supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_ORIGINAL_TEXT) as? PreviewOriginalTextFragment
+    private val getPreviewTranslatedTextFragment
+        get() = supportFragmentManager.findFragmentByTag(FRAGMENT_PREVIEW_TRANSLATED_TEXT) as? PreviewTranslatedTextFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,9 +102,7 @@ class PreviewActivity : AppCompatActivity() {
      * preview画面に翻訳データを反映
      */
     private fun setupTranslationData() {
-        if (viewModel.previewTranslation.value == null) {
-            viewModel.loadPreviewTranslation(translationId)
-        }
+        viewModel.loadPreviewTranslation(translationId)
     }
 
     /**
@@ -108,12 +110,11 @@ class PreviewActivity : AppCompatActivity() {
      */
     private fun setupDialog() {
         viewModel.errorMsg.observe(this, EventObserver { errorMsg ->
-            showErrorDialog("check error log 'ERROR_PREVIEW'\\n" + errorMsg)
+            showErrorDialog("check error log 'ERROR_PREVIEW'\n" + errorMsg)
         })
     }
 
-    private fun showErrorDialog(errorMsg: String) =
-        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
+    private fun showErrorDialog(errorMsg: String) = ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
 
     private fun getPreviewFragment(tag: String): Fragment {
         return when (tag) {
@@ -123,5 +124,4 @@ class PreviewActivity : AppCompatActivity() {
             else -> PreviewTranslatedTextFragment.newInstance()
         }
     }
-
 }

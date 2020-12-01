@@ -1,6 +1,5 @@
 package com.example.visiontranslator.infra.model
 
-import com.example.visiontranslator.infra.model.AppDatabase
 import com.example.visiontranslator.infra.model.translation.TranslationDao
 import dagger.Module
 import dagger.Provides

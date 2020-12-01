@@ -73,10 +73,10 @@
             android:onClick="@{()->viewModel.showControlBtn()}"
             app:borderWidth="0dp"
             app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="@id/border"
+            app:layout_constraintTop_toBottomOf="@id/previewToolbar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/borderNav"
-            app:layout_constraintTop_toTopOf="@id/border"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             app:srcCompat="@drawable/visibility"
             app:tint="@android:color/white" />
 

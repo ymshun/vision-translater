@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 /**
  * TranslationModel(翻訳済みのテキストや写真などを保存するDBモデル)を操作するメソッドの定義
+ * モデル単位で作成するリポジトリ
  * メインセーフティにsuspendメソッドを定義する
  */
 class TranslationRepositoryImpl
@@ -49,10 +50,9 @@ class TranslationRepositoryImpl
         translationDao.deleteTranslationByID(translationId)
     }
 
-    override suspend fun deleteTranslations(translationIdList: List<Long>) =
-        withContext(Dispatchers.IO) {
-            translationDao.deleteTranslations(translationIdList)
-        }
+    override suspend fun deleteTranslations(translationIdList: List<Long>) = withContext(Dispatchers.IO) {
+        translationDao.deleteTranslations(translationIdList)
+    }
 
     override suspend fun deleteAllTranslations() = withContext(Dispatchers.IO) {
         translationDao.deleteAllTranslations()
@@ -62,10 +62,9 @@ class TranslationRepositoryImpl
         translationDao.findTranslationByID(id)
     }
 
-    override suspend fun findTranslationByQueryWord(queryWord: String) =
-        withContext(Dispatchers.IO) {
-            translationDao.findTranslationByQueryWord(queryWord)
-        }
+    override suspend fun findTranslationByQueryWord(queryWord: String) = withContext(Dispatchers.IO) {
+        translationDao.findTranslationByQueryWord(queryWord)
+    }
 
     override fun getTranslationForTestCase(): Translation {
         val randomInt = (0 until 10).random()
@@ -83,5 +82,10 @@ class TranslationRepositoryImpl
             imgUri = testCaseImgUri.toString()
         )
         return translation
+    }
+
+    override fun getOriginalTextForTestCase(): String {
+        val randomInt = (0 until 4).random()
+        return context.resources.getStringArray(R.array.testcaseOriginalText)[randomInt]
     }
 }

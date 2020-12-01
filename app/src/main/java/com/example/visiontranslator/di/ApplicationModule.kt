@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.visiontranslator.infra.model.AppDatabase
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 /**
@@ -20,5 +19,4 @@ class ApplicationModule(private val application: Application) {
     @Provides
     @Singleton
     fun providesAppDataBase() = AppDatabase.getInstance(application.applicationContext)
-
 }

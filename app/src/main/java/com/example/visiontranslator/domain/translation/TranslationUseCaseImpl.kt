@@ -38,8 +38,7 @@ class TranslationUseCaseImpl
     /**
      * Google Vision API で画像からテキストを検出
      */
-    private suspend fun detectTextFromImg(imgUri: Uri): Translation =
-        ocrService.getDetectedDescription(imgUri)
+    private suspend fun detectTextFromImg(imgUri: Uri): Translation = ocrService.getDetectedDescription(imgUri)
 
     /**
      * GASでテキストを翻訳する
@@ -54,7 +53,6 @@ class TranslationUseCaseImpl
     /**
      * TranslationモデルをローカルDBに保存する
      */
-    private suspend fun insertTranslation(translation: Translation): Long =
-        translationRepository.insertTranslation(translation)
+    private suspend fun insertTranslation(translation: Translation): Long = translationRepository.insertTranslation(translation)
 
 }

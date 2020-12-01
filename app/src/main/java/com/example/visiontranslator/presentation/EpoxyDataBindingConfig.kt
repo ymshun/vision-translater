@@ -8,4 +8,3 @@ import com.example.visiontranslator.R
  */
 @EpoxyDataBindingPattern(rClass = R::class, layoutPrefix = "epoxy_cell_")
 interface EpoxyDataBindingConfig
-

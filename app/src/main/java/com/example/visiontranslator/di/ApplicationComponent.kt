@@ -4,6 +4,7 @@ import com.example.visiontranslator.domain.DomainModule
 import com.example.visiontranslator.infra.InfraModule
 import com.example.visiontranslator.infra.model.DataSourceModule
 import com.example.visiontranslator.presentation.ViewModelModule
+import com.example.visiontranslator.presentation.ui.edit.EditActivity
 import com.example.visiontranslator.presentation.ui.home.HomeActivity
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.presentation.ui.preview.PreviewImgFragment
@@ -31,6 +32,7 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
     fun inject(activity: HomeActivity)
+    fun inject(activity: EditActivity)
     fun inject(activity: TranslationActivity)
     fun inject(activity: PreviewActivity)
     // fun inject(activity: xxxActivity)

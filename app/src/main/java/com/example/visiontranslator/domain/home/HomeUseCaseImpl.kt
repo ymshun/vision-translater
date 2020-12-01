@@ -14,14 +14,11 @@ class HomeUseCaseImpl
 @Inject constructor(
     private val translationsRepository: TranslationRepository
 ) : HomeUseCase {
-    override suspend fun getAllTranslations(): List<Translation> =
-        translationsRepository.getAllTranslations()
+    override suspend fun getAllTranslations(): List<Translation> = translationsRepository.getAllTranslations()
 
-    override suspend fun findTranslationByQueryWord(queryWord: String): List<Translation> =
-        translationsRepository.findTranslationByQueryWord(queryWord)
+    override suspend fun findTranslationByQueryWord(queryWord: String): List<Translation> = translationsRepository.findTranslationByQueryWord(queryWord)
 
-    override suspend fun deleteTranslations(translationIdList: List<Long>) =
-        translationsRepository.deleteTranslations(translationIdList)
+    override suspend fun deleteTranslations(translationIdList: List<Long>) = translationsRepository.deleteTranslations(translationIdList)
 
     override suspend fun insertTranslationTestCase() {
         val testcase = translationsRepository.getTranslationForTestCase()

@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.example.visiontranslator.presentation.ui.translation.TranslationViewModel" />
     </data>
 
@@ -16,6 +16,17 @@
         android:background="@color/cardview_dark_background"
         tools:context=".presentation.ui.translation.TranslationActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/translationToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/toolbarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@android:color/white" />
+
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
@@ -23,14 +34,14 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:alpha="0.75"
-            android:onClick="@{()->viewmodel.showTestCaseEvent()}"
+            android:onClick="@{()->viewModel.showTestCaseEvent()}"
             android:text="テストケース"
             android:textColor="@android:color/white"
             app:icon="@drawable/photo"
             app:iconTint="@android:color/white"
-            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:isVisible="@{viewModel.isVisibleNav}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/translationToolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/cropFab"
@@ -40,9 +51,9 @@
             android:layout_marginEnd="16dp"
             android:alpha="0.75"
             android:foregroundTint="@android:color/white"
-            android:onClick="@{()->viewmodel.openCropEvent()}"
+            android:onClick="@{()->viewModel.openCropEvent()}"
             app:fabSize="mini"
-            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:isVisible="@{viewModel.isVisibleNav}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/floatingActionButton"
             app:srcCompat="@drawable/crop"
@@ -55,9 +66,9 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:alpha="0.75"
-            android:onClick="@{()-> viewmodel.showGalleryEvent()}"
+            android:onClick="@{()-> viewModel.showGalleryEvent()}"
             app:fabSize="mini"
-            app:isVisible="@{viewmodel.isVisibleNav}"
+            app:isVisible="@{viewModel.isVisibleNav}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cropFab"
             app:srcCompat="@drawable/filter"
@@ -67,20 +78,21 @@
             android:id="@+id/translateImg"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:onClick="@{()->viewmodel.onClickDisplay()}"
+            android:onClick="@{()->viewModel.onClickDisplay()}"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_launcher_background"
-            app:glideSrc="@{viewmodel.imageUri}"
+            app:glideSrc="@{viewModel.imageUri}"
             app:layout_constraintBottom_toTopOf="@id/translateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/translationToolbar" />
 
         <Button
             android:id="@+id/translateBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->viewmodel.translate()}"
+            android:layout_marginHorizontal="3dp"
+            android:onClick="@{()->viewModel.translate()}"
             android:text="@string/translate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

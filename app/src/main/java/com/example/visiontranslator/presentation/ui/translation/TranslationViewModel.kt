@@ -97,6 +97,6 @@ class TranslationViewModel
     fun openPreviewEvent(id: Long) {
         _openPreviewEvent.postValue(Event(id))
     }
-
 }
+
 

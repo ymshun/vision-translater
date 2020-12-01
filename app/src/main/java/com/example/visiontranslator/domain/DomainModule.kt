@@ -1,5 +1,7 @@
 package com.example.visiontranslator.domain
 
+import com.example.visiontranslator.domain.edit.EditUseCase
+import com.example.visiontranslator.domain.edit.EditUseCaseImpl
 import com.example.visiontranslator.domain.home.HomeUseCase
 import com.example.visiontranslator.domain.home.HomeUseCaseImpl
 import com.example.visiontranslator.domain.preview.PreviewUseCase
@@ -44,5 +46,9 @@ abstract class DomainModule {
         useCase: PreviewUseCaseImpl
     ): PreviewUseCase
 
-
+    @Singleton
+    @Binds
+    abstract fun bindsEditUseCase(
+        useCase: EditUseCaseImpl
+    ): EditUseCase
 }

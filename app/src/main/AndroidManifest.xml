@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.visiontranslator.presentation.ui.home.HomeActivity">
+        <activity android:name=".presentation.ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.visiontranslator.presentation.ui.preview.PreviewActivity"
+            android:name=".presentation.ui.preview.PreviewActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.example.visiontranslator.presentation.ui.translation.TranslationActivity" />
+        <activity android:name=".presentation.ui.translation.TranslationActivity" />
+        <activity android:name=".presentation.ui.edit.EditActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

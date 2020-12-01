@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
  * LiveDataのイベント通知を observeするためのラッパークラス
  * 1度のみイベント通知を行う
  *
- * @author Yamashita 2020/09
  */
 
 open class Event<out T>(private val content: T) {
@@ -44,4 +43,3 @@ class EventObserver<T>(private val onEventUnhandledContent: (T) -> Unit) : Obser
         }
     }
 }
-

@@ -2,6 +2,7 @@ package com.example.visiontranslator.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.visiontranslator.presentation.ui.edit.EditViewModel
 import com.example.visiontranslator.presentation.ui.home.HomeViewModel
 import com.example.visiontranslator.presentation.ui.preview.PreviewViewModel
 import com.example.visiontranslator.presentation.ui.translation.TranslationViewModel
@@ -50,4 +51,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PreviewViewModel::class)
     abstract fun bindsPreviewViewModel(viewModel: PreviewViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditViewModel::class)
+    abstract fun bindsEditViewModel(viewModel: EditViewModel): ViewModel
 }

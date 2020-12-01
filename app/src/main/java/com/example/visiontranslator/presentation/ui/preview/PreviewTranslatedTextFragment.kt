@@ -62,8 +62,7 @@ class PreviewTranslatedTextFragment : Fragment() {
             if (!it) return@observe
             binding.previewTranslateText.isFocusableInTouchMode = it
             binding.previewTranslateText.requestFocus()
-            val inputMng =
-                requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMng = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             inputMng.showSoftInput(binding.previewTranslateText, InputMethodManager.SHOW_FORCED)
         }
     }

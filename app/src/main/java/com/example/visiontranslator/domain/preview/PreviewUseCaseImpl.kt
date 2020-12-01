@@ -17,9 +17,7 @@ class PreviewUseCaseImpl
      * TranslationモデルをID から取得
      * @return Translationモデル 存在しなければnull
      */
-    override suspend fun findTranslationById(id: Long): Translation? =
-        translationRepository.findTranslationByID(id)
+    override suspend fun findTranslationById(id: Long): Translation? = translationRepository.findTranslationByID(id)
 
-    override suspend fun updateTranslation(translation: Translation) =
-        translationRepository.updateTranslation(translation)
+    override suspend fun updateTranslation(translation: Translation) = translationRepository.updateTranslation(translation)
 }

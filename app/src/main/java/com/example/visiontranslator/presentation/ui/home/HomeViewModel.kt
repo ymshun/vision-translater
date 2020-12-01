@@ -25,11 +25,6 @@ class HomeViewModel
     val openImageSelectEvent: LiveData<Event<Unit>>
         get() = _openImageSelectEvent
 
-    // 設定画面遷移
-    private val _insertTestcaseEvent = MutableLiveData<Event<Unit>>()
-    val insertTestcaseEvent: LiveData<Event<Unit>>
-        get() = _insertTestcaseEvent
-
     // 文字入力画面遷移
     private val _openEditEvent = MutableLiveData<Event<Unit>>()
     val openEditEvent: LiveData<Event<Unit>>

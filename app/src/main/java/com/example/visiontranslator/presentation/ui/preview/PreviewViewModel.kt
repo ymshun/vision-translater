@@ -92,7 +92,6 @@ class PreviewViewModel
 
     fun showControlBtn() {
         _isShowControlBtn.value = !_isShowControlBtn.value!!
-        Log.d("test44",_isShowControlBtn.value.toString())
     }
 
     // contaner1レイアウトのフラグメントを切り替える
@@ -114,5 +113,4 @@ class PreviewViewModel
         }
         previewContainer2.value = tempContainerList[0]
     }
-
 }

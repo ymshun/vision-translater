@@ -16,5 +16,4 @@ class HomeEpoxyController(private val viewModel: HomeViewModel) :
             }
         }
     }
-
 }

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -49,9 +49,10 @@ class TranslationActivity : AppCompatActivity(),
         binding.let {
             lifecycle.addObserver(viewModel)
             it.lifecycleOwner = this@TranslationActivity
-            it.viewmodel = viewModel
+            it.viewModel = viewModel
         }
 
+        setupToolbar()
         setupGallery()
         setupCropImg()
         setupDialog()
@@ -69,9 +70,20 @@ class TranslationActivity : AppCompatActivity(),
                 viewModel.setImageUri(result?.uri)
             }
             CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE -> {
-
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return true
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.translationToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupGallery() {
@@ -123,20 +135,16 @@ class TranslationActivity : AppCompatActivity(),
             addCategory(Intent.CATEGORY_OPENABLE)
             setType("image/*")
         }
-
         startActivityForResult(intent, REQUEST_GALLERY)
     }
 
     private fun showTestCaseDialog() = TestCaseDialog.showDialog(supportFragmentManager)
 
-    private fun showLoadingDialog() =
-        LoadingTransparentDialog.showDialog(supportFragmentManager)
+    private fun showLoadingDialog() = LoadingTransparentDialog.showDialog(supportFragmentManager)
 
-    private fun closeLoadingDialog() =
-        LoadingTransparentDialog.closeDialog(supportFragmentManager)
+    private fun closeLoadingDialog() = LoadingTransparentDialog.closeDialog(supportFragmentManager)
 
-    private fun showErrorDialog(errorMsg: String) =
-        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
+    private fun showErrorDialog(errorMsg: String) = ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
 
     override fun onClickTestImg(from: TestCaseDialog, drawableResId: Int) {
         val uri = Uri.parse(

@@ -11,6 +11,7 @@ import com.example.visiontranslator.AppApplication
 import com.example.visiontranslator.R
 import com.example.visiontranslator.databinding.ActivityHomeBinding
 import com.example.visiontranslator.presentation.ui.dialog.ErrorDialog
+import com.example.visiontranslator.presentation.ui.edit.EditActivity
 import com.example.visiontranslator.presentation.ui.preview.PreviewActivity
 import com.example.visiontranslator.presentation.ui.translation.TranslationActivity
 import com.example.visiontranslator.util.EventObserver
@@ -34,7 +35,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityHomeBinding
-
     private lateinit var homeController: HomeEpoxyController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,12 +100,8 @@ class HomeActivity : AppCompatActivity() {
         })
 
         viewModel.openEditEvent.observe(this, EventObserver {
-            val intent = TranslationActivity.createIntent(this)
+            val intent = EditActivity.createIntent(this)
             startActivity(intent)
-        })
-
-        viewModel.insertTestcaseEvent.observe(this, EventObserver {
-
         })
 
         viewModel.openPreviewEvent.observe(this, EventObserver {
@@ -119,7 +115,7 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupDialog() {
         viewModel.errorMsg.observe(this, EventObserver { errorMsg ->
-            showErrorDialog("check error log 'HOME_ACTIVITY'\\n" + errorMsg)
+            showErrorDialog("check error log 'HOME_ACTIVITY'\n" + errorMsg)
         })
     }
 
@@ -128,8 +124,5 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun refreshTranslationList() = viewModel.loadTranslations()
 
-    private fun showErrorDialog(errorMsg: String) =
-        ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
-
-
+    private fun showErrorDialog(errorMsg: String) = ErrorDialog.showDialog(supportFragmentManager, errorMsg = errorMsg)
 }
