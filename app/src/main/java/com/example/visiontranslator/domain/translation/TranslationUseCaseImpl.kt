@@ -5,6 +5,7 @@ import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.infra.repository.translation.TranslationRepository
 import com.example.visiontranslator.infra.service.ocr.OCRService
 import com.example.visiontranslator.infra.service.translate.TranslateService
+import com.example.visiontranslator.util.ConstantKey.ErrorMsg.ERROR_NO_TEXT
 import javax.inject.Inject
 
 /**
@@ -27,6 +28,7 @@ class TranslationUseCaseImpl
      */
     override suspend fun translateText(imgUri: Uri): Long {
         val detectedTranslation = detectTextFromImg(imgUri)
+        if (detectedTranslation.originalText.trim() == "") throw Exception(ERROR_NO_TEXT)
         val translatedText = translateText(detectedTranslation)
         return insertTranslation(
             detectedTranslation.apply {

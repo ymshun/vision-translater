@@ -51,7 +51,7 @@
             android:hint="翻訳したい文章を入力してください"
             android:inputType="textMultiLine"
             android:text="@={viewModel.originalText}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/translateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editToolbar" />

@@ -45,11 +45,11 @@ class OCRServiceImpl @Inject constructor(private val context: Context) : OCRServ
             }
             // リクエストを送り、画像のテキスト検出結果を取得
             val response = vision.images().annotate(batchAnnotateRequest).execute() ?: throw Exception(ErrorMsg.ERROR_GOOGLE_VISION_API)
-            val annotation: List<EntityAnnotation> = response.responses[0].textAnnotations
+            val annotation: List<EntityAnnotation>? = if (response.responses[0] != null) response.responses[0].textAnnotations else null
 
             return@withTimeout Translation(
-                originalText = annotation[0].description,
-                sourceLang = annotation[0].locale ?: "en",
+                originalText = annotation?.get(0)?.description ?: "",
+                sourceLang = annotation?.get(0)?.locale ?: "en",
                 translatedText = "",
                 targetLang = "ja",
                 imgUri = detectImgUri.toString()

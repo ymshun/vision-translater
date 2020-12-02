@@ -50,6 +50,9 @@ class TestCaseDialog : DialogFragment() {
         R.drawable.testcase8,
         R.drawable.testcase9,
         R.drawable.testcase10,
+        R.drawable.testcase11,
+        R.drawable.testcase12,
+        R.drawable.testcase13,
     )
 
     override fun onAttach(context: Context) {

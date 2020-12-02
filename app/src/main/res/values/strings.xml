@@ -4,13 +4,4 @@
 
     <!--  navigation  -->
     <string name="testDataNav">次の画面でテスト用の画像を入力することもできます</string>
-
-    <!-- 翻訳用のサンプルテキスト-->
-    <string-array name="testcaseOriginalText">
-        <item>準備中1</item>
-        <item>準備中2</item>
-        <item>準備中3</item>
-        <item>準備中4</item>
-        <item>準備中5</item>
-    </string-array>
 </resources>

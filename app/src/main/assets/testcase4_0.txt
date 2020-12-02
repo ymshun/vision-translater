@@ -1,0 +1,30 @@
+Preface
+Dataism says that the universe consists of data flows, and the value of any phenomenon or entity is determined by its contribution to
+data processing.Dataism thereby collapses the barrier between animals [humans] and machines, and expects electronic algorithms to
+eventually decipher and outperform biochemical algorithms."
+Yuval Noah Harari
+Finding the right algorithm to automatically and successfully trade in financial markets is the holy grail in finance. Not too long ago,
+algorithmic trading was only available and possible for institutional players with deep pockets and lots of assets under management. Recent
+developments in the areas of open source, open data, cloud compute, and cloud storage, as well as online trading platforms, have leveled the
+playing field for smaller institutions and individual traders, making it possible to get started in this fascinating discipline while equipped
+only with a typical notebook or desktop computer and a reliable internet connection.
+Nowadays, Python and its ecosystem of powerful packages is the technology platform of choice for algorithmic trading. Among other
+things, Python allows you to do efficient data analytics (with pandas, for example), to apply machine learning to stock market prediction
+(with scikit-learn, for example), or even to make use of Google's deep learning technology with TensorFIlow.
+This is a book about Python for algorithmic trading, primarily in the context of alpha generating strategies (see Chapter 1). Such a book
+at the intersection of two vast and exciting fields can hardly cover all topics of relevance. However, it can cover a range of important meta
+topics in depth.
+These topics include:
+Financial data
+Financial data is at the core of every algorithmic trading project. Python and packages like NumPy and pandas do a great job of handling
+and working with structured financial data of any kind (end-of-day, intraday, high frequency).
+Backtesting
+There should be no automated algorithmic trading without a rigorous testing of the trading strategy to be deployed. The book covers,
+among other things, trading strategies based on simple moving averages, momentum, mean-reversion, and machine/deep-learning
+based prediction.
+Real-time data
+Algorithmic trading requires dealing with real-time data, online algorithms based on it, and visualization in real time. The book provides
+an introduction to socket programming with ZeroMQ and streaming visualization.
+Online platforms
+No trading can take place without a trading platform. The book covers two popular electronic trading platforms: Oanda and FXCM.
+Automation
