@@ -16,6 +16,7 @@ import com.example.visiontranslator.util.ConstantKey.FragmentTag.FRAGMENT_PREVIE
 import com.example.visiontranslator.util.ConstantKey.FragmentTag.FRAGMENT_PREVIEW_ORIGINAL_TEXT
 import com.example.visiontranslator.util.ConstantKey.FragmentTag.FRAGMENT_PREVIEW_TRANSLATED_TEXT
 import com.example.visiontranslator.util.ConstantKey.IntentExtraTag
+import com.example.visiontranslator.util.ConstantKey.IntentExtraTag.INTENT_SELECTED_ID
 import com.example.visiontranslator.util.EventObserver
 import javax.inject.Inject
 
@@ -41,9 +42,7 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     // intentでpreviewに表示するモデルのIDを取得
-    private val translationId: Long by lazy {
-        intent.getLongExtra(IntentExtraTag.INTENT_SELECTED_ID, 1L)
-    }
+    private var translationId: Long = 1L
     private lateinit var binding: ActivityPreviewBinding
 
     private val previewFragment
@@ -56,6 +55,7 @@ class PreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppApplication.component.inject(this)
+        translationId = savedInstanceState?.getLong(INTENT_SELECTED_ID, 1L) ?: intent.getLongExtra(INTENT_SELECTED_ID, 1L)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preview)
         binding.let {
             lifecycle.addObserver(viewModel)

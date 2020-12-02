@@ -42,9 +42,8 @@ class PreviewTranslatedTextFragment : Fragment() {
         .also {
             binding = it
             binding.let { binding ->
-                binding.lifecycleOwner = this
+                binding.lifecycleOwner = viewLifecycleOwner
                 binding.viewModel = viewModel
-                lifecycle.addObserver(viewModel)
             }
         }.root
 

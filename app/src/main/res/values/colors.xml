@@ -9,6 +9,7 @@
     <color name="colorPrimaryLight">#4300BCD4</color>
     <color name="grayBackground">#0D000000</color>
     <color name="clickBackground">#14000000</color>
+    <color name="selected">#4F000000</color>
 
     <color name="textColor">#434343</color>
     <color name="invalidTextColor">#7C7C7C</color>

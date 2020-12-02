@@ -51,7 +51,7 @@
                 android:gravity="top"
                 android:paddingTop="18dp"
                 android:paddingBottom="16dp"
-                android:text="@={viewModel.previewTranslation.translatedText}"
+                android:text="@={viewModel.previewTranslation.originalText}"
                 android:textColor="@{viewModel.editModeOriginalText ? @color/textColor : @color/invalidTextColor}"
                 tools:text="翻訳です。テストケース" />
         </ScrollView>

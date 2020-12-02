@@ -55,11 +55,9 @@ class TestCaseDialog : DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = if (context is TestCaseDialogListener) {
-            // called from activity
-            context as? TestCaseDialogListener
+            context as? TestCaseDialogListener  // called from activity
         } else {
-            // called from fragment
-            parentFragment as? TestCaseDialogListener
+            parentFragment as? TestCaseDialogListener   // called from fragment
         }
     }
 

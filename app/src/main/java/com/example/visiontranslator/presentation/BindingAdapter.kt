@@ -38,6 +38,14 @@ fun View.isVisibleGone(isVisible: Boolean) {
     this.visibility = if (isVisible) View.VISIBLE else View.GONE
 }
 
+@BindingAdapter("app:onLongClick")
+fun View.setLongClickListener(callback: (() -> Unit)?) {
+    this.setOnLongClickListener {
+        callback?.invoke()
+        true
+    }
+}
+
 @BindingAdapter("app:translationText", "app:isTranslatedText")
 fun EditText.setTranslationText(translation: Translation?, isTranslatedText: Boolean) {
     this.setText(if (isTranslatedText) translation?.translatedText else translation?.originalText)

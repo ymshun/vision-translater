@@ -9,12 +9,12 @@ interface HomeUseCase {
     /**
      * 一覧表示するためにTranslationModelのデータをすべてリストとして取得
      */
-    suspend fun getAllTranslations(): List<Translation>
+    suspend fun getAllTranslations(): MutableMap<Translation, Boolean>
 
     /**
      * 一覧からキーワード検索を行い結果をリストとして取得
      */
-    suspend fun findTranslationByQueryWord(queryWord: String): List<Translation>
+    suspend fun findTranslationByQueryWord(queryWord: String): MutableMap<Translation, Boolean>
 
     /**
      * idからTranslation モデルを削除

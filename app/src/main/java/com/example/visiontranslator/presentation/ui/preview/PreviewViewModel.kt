@@ -1,7 +1,6 @@
 package com.example.visiontranslator.presentation.ui.preview
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -73,10 +72,10 @@ class PreviewViewModel
     /**
      * 画面のフォーカスが外れた時にTranslationモデルをローカルに保存する
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun updatePreviewTranslation() {
         processCall {
-            previewUseCase.updateTranslation(this._previewTranslation.value!!)
+            previewUseCase.updateTranslation(_previewTranslation.value!!)
         }
     }
 

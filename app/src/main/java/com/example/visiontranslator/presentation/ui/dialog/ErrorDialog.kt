@@ -54,11 +54,9 @@ class ErrorDialog : DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = if (context is ErrorDialogListener) {
-            // called from activity
-            context as? ErrorDialogListener
+            context as? ErrorDialogListener // called from activity
         } else {
-            // called from fragment
-            parentFragment as? ErrorDialogListener
+            parentFragment as? ErrorDialogListener  // called from fragment
         }
     }
 

@@ -2,7 +2,6 @@ package com.example.visiontranslator.infra.service.ocr
 
 import android.net.Uri
 import com.example.visiontranslator.infra.model.translation.Translation
-import com.google.api.services.vision.v1.model.EntityAnnotation
 
 
 interface OCRService {

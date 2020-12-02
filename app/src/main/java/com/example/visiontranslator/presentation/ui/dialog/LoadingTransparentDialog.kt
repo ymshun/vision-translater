@@ -39,11 +39,11 @@ class LoadingTransparentDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let { activity ->
-            val builder = AlertDialog.Builder(activity, R.style.TransparentDialogTheme)
             val binding = DialogLoadingBinding.inflate(LayoutInflater.from(activity))
             binding.lifecycleOwner = this@LoadingTransparentDialog
+            isCancelable = false
+            val builder = AlertDialog.Builder(activity, R.style.TransparentDialogTheme)
             builder.setView(binding.root)
-                .setCancelable(false)
                 .create()
         } ?: throw IllegalStateException("Activity not found")
     }

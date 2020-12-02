@@ -10,6 +10,10 @@
             type="com.example.visiontranslator.infra.model.translation.Translation" />
 
         <variable
+            name="isClicked"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.example.visiontranslator.presentation.ui.home.HomeViewModel" />
     </data>
@@ -20,14 +24,15 @@
         android:layout_height="190dp"
         android:layout_margin="3dp"
         android:elevation="4dp"
-        android:foreground="@drawable/click_back"
-        android:onClick="@{()->viewModel.openPreviewEvent(translation.id)}"
+        android:foreground="@{isClicked? @drawable/check_bg : @drawable/click_back}"
+        android:onClick="@{()->viewModel.openPreviewEvent(translation)}"
         app:cardCornerRadius="4dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:onLongClick="@{()->viewModel.startDeleteMode(translation)}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,15 +40,33 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
-                app:glideSrc="@{translation.imgUri}" />
+                app:glideSrc="@{translation.imgUri}"
+                app:isVisibleGone="@{!translation.imgUri.empty}"
+                tools:src="@drawable/testcase1" />
 
             <TextView
-                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:padding="4dp"
+                android:text="@{translation.originalText}"
+                app:isVisibleGone="@{translation.imgUri.empty}"
+                tools:text="サンプルテキスト(editor上でのみ表示)"
+                tools:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimary"
+                app:isVisibleGone="@{translation.imgUri.empty}"
+                tools:visibility="gone" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -51,7 +74,5 @@
                 android:text="@{translation.translatedText}"
                 tools:text="サンプルテキスト(editor上でのみ表示)" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </layout>

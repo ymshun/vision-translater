@@ -18,7 +18,10 @@ import com.example.visiontranslator.util.EventObserver
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
-
+/**
+ * translation modelのリストを表示するホーム画面
+ * launch activity
+ */
 class HomeActivity : AppCompatActivity() {
 
     companion object {
@@ -59,8 +62,7 @@ class HomeActivity : AppCompatActivity() {
      */
     private fun setupEpoxy() {
         homeController = HomeEpoxyController(viewModel)
-        epoxyRecyclerViewMain.adapter = homeController.adapter
-        refreshTranslationList()
+        binding.homeEpoxy.adapter = homeController.adapter
         viewModel.translationList.observe(this) { translationList ->
             homeController.setData(translationList)
         }
@@ -70,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
      * 検索インターフェースの設定
      */
     private fun setupSearchView() {
+        // クエリリスナ
         binding.searchView.setOnQueryTextListener(
             object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -79,7 +82,7 @@ class HomeActivity : AppCompatActivity() {
 
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText == null || newText.trim() == "") {
-                        viewModel.loadTranslations()
+                        refreshTranslationList()
                     } else {
                         viewModel.searchTranslation(newText)
                     }
@@ -87,6 +90,12 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         )
+        // searchViewのクリック領域を全体に
+        viewModel.focusSearchViewEvent.observe(this, EventObserver {
+            binding.searchView.apply {
+                isIconified = false
+            }
+        })
     }
 
     /**

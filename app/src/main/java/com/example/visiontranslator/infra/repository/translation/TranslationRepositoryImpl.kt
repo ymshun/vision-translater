@@ -75,11 +75,11 @@ class TranslationRepositoryImpl
                     context.resources.getResourceEntryName(testImgList[randomInt])
         )
         val translation = Translation(
-            originalText = "",
+            originalText = "test case No. $randomInt 準備中 original Text",
             sourceLang = "en",
-            translatedText = "test case No. $randomInt 準備中",
+            translatedText = "test case No. $randomInt 準備中 translateText",
             targetLang = "test case No. $randomInt 準備中",
-            imgUri = testCaseImgUri.toString()
+            imgUri = if (randomInt > 3) testCaseImgUri.toString() else ""
         )
         return translation
     }

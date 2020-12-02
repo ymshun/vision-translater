@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -33,19 +34,19 @@
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
-                    app:queryHint="Search..."
-                    android:queryBackground="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
-                    app:searchHintIcon="@null"
                     android:layout_height="wrap_content"
-                    android:elevation="7dp" />
+                    android:backgroundTint="@android:color/transparent"
+                    android:elevation="7dp"
+                    android:onClick="@{()->viewmodel.focusSearchView()}"
+                    android:queryBackground="@android:color/transparent"
+                    app:queryHint="Search..." />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/epoxyRecyclerViewMain"
+            android:id="@+id/homeEpoxy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="-1dp"
@@ -54,10 +55,41 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="@integer/home_columns" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cancelDeteteModeFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{()->viewmodel.cancelDeleteMode()}"
+            app:borderWidth="0dp"
+            app:isVisibleGone="@{viewmodel.isDeleteMode}"
+            app:srcCompat="@drawable/close"
+            app:tint="@android:color/white"
+            tools:visibility="gone" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:onClick="@{()->viewmodel.deleteTranslations()}"
+            app:borderWidth="0dp"
+            app:isVisibleGone="@{viewmodel.isDeleteMode}"
+            app:srcCompat="@drawable/delete"
+            app:tint="@android:color/white"
+            tools:visibility="gone" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            app:isVisibleGone="@{!viewmodel.isDeleteMode}"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,6 +99,7 @@
                 android:layout_marginHorizontal="3dp"
                 android:layout_marginBottom="16dp"
                 android:onClick="@{()->viewmodel.openEditEvent()}"
+                app:isVisibleGone="@{!viewmodel.isDeleteMode}"
                 app:srcCompat="@drawable/edit"
                 app:tint="@android:color/white" />
 
@@ -75,10 +108,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="3dp"
-                android:text="テストデータ入力"
-                android:textColor="@android:color/white"
                 android:layout_marginBottom="12dp"
                 android:onClick="@{()->viewmodel.insertTestCaseEvent()}"
+                android:text="テストデータ入力"
+                android:textColor="@android:color/white"
                 app:srcCompat="@drawable/settings"
                 app:tint="@android:color/white" />
 
@@ -90,9 +123,9 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:onClick="@{() -> viewmodel.openImageSelectEvent()}"
+                app:isVisibleGone="@{!viewmodel.isDeleteMode}"
                 app:srcCompat="@drawable/filter"
                 app:tint="@android:color/white" />
         </LinearLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
