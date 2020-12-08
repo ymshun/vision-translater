@@ -1,17 +1,22 @@
 package com.example.visiontranslator.presentation.ui.home
 
 import android.content.Context
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.asFlow
 import com.example.visiontranslator.domain.home.HomeUseCase
 import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.presentation.ui.base.BaseViewModel
 import com.example.visiontranslator.util.ConstantKey.ViewModelTab.HOME_VIEWMODEL
 import com.example.visiontranslator.util.Event
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
+import kotlin.collections.set
 
+@FlowPreview
 class HomeViewModel
 @Inject constructor(
     context: Context,
@@ -19,7 +24,24 @@ class HomeViewModel
 ) : BaseViewModel(context.applicationContext, HOME_VIEWMODEL) {
 
     // 翻訳データのリスト
-    private val _translationList = MutableLiveData<MutableMap<Translation, Boolean>>()
+    private val _translationList = object : MutableLiveData<MutableMap<Translation, Boolean>>() {
+        override fun onActive() {
+            processCall {
+                searchViewQueryWord.asFlow()
+                    .debounce(200)  // 200msecまってから検索クエリ実行
+                    .distinctUntilChanged()
+                    .collect {
+                        if (it.trim().isNullOrEmpty()) {
+                            // 全件取得
+                            this.value = homeUseCase.getAllTranslations()
+                        } else {
+                            // 検索クエリの実行
+                            this.value = homeUseCase.findTranslationByQueryWord(it)
+                        }
+                    }
+            }
+        }
+    }
     val translationList: LiveData<MutableMap<Translation, Boolean>>
         get() = _translationList
 
@@ -29,8 +51,8 @@ class HomeViewModel
         get() = _isDeleteMode
 
     // 検索ビュークリックでフォーカスをあてる
-    private val _focusSearchViewEvent = MutableLiveData<Event<Unit>>()
-    val focusSearchViewEvent: LiveData<Event<Unit>>
+    private val _focusSearchViewEvent = MutableLiveData<Event<Boolean>>()
+    val focusSearchViewEvent: LiveData<Event<Boolean>>
         get() = _focusSearchViewEvent
 
     // 画像選択画面遷移
@@ -48,10 +70,12 @@ class HomeViewModel
     val openPreviewEvent: LiveData<Event<Long>>
         get() = _openPreviewEvent
 
+    // 検索クエリの変更に応じて検索結果を表示
+    private val searchViewQueryWord = MutableLiveData<String>("")
+
     /**
      * リスト表示するTranslationデータをロードする
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun loadTranslations() {
         processCall {
             _translationList.postValue(homeUseCase.getAllTranslations())
@@ -62,10 +86,8 @@ class HomeViewModel
      * 検索インターフェースの設定
      * TranslationModelから部分一致する検索結果を取得
      */
-    fun searchTranslation(queryWord: String) {
-        processCall {
-            _translationList.value = homeUseCase.findTranslationByQueryWord(queryWord)
-        }
+    fun setSearchQuery(queryWord: String?) {
+        searchViewQueryWord.postValue(queryWord)
     }
 
     /**
@@ -101,8 +123,10 @@ class HomeViewModel
         }
     }
 
+    // searchViewのフォーカスを制御。フォーカスが外れたらクエリワードの初期化
     fun focusSearchView() {
-        _focusSearchViewEvent.value = Event(Unit)
+        _focusSearchViewEvent.value = Event(_focusSearchViewEvent.value?.peekContent() ?: true)
+        if (!_focusSearchViewEvent.value!!.peekContent()) searchViewQueryWord.value = ""
     }
 
     // 画像選択画面
