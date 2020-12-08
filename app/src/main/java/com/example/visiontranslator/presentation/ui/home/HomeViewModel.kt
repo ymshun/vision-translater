@@ -1,9 +1,7 @@
 package com.example.visiontranslator.presentation.ui.home
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
+import androidx.lifecycle.*
 import com.example.visiontranslator.domain.home.HomeUseCase
 import com.example.visiontranslator.infra.model.translation.Translation
 import com.example.visiontranslator.presentation.ui.base.BaseViewModel
@@ -76,6 +74,7 @@ class HomeViewModel
     /**
      * リスト表示するTranslationデータをロードする
      */
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun loadTranslations() {
         processCall {
             _translationList.postValue(homeUseCase.getAllTranslations())
