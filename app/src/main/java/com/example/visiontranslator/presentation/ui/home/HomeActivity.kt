@@ -81,19 +81,17 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    if (newText == null || newText.trim() == "") {
-                        refreshTranslationList()
-                    } else {
-                        viewModel.searchTranslation(newText)
-                    }
+                    viewModel.setSearchQuery(newText)
                     return true
                 }
             }
         )
         // searchViewのクリック領域を全体に
         viewModel.focusSearchViewEvent.observe(this, EventObserver {
-            binding.searchView.apply {
-                isIconified = false
+            if (it) {
+                binding.searchView.apply {
+                    isIconified = false
+                }
             }
         })
     }
