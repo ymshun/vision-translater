@@ -10,7 +10,7 @@
 
 
 ## アーキテクチャ
-<img width="900" src="https://user-images.githubusercontent.com/52367439/101512332-3888f000-39be-11eb-9396-e0442580f621.png"/>
+<img width="900" src="https://user-images.githubusercontent.com/52367439/101977889-3c559480-3c94-11eb-9003-36aaf7dd70f5.png"/>
 MVVMをベースにCleanArchitectureのUseCaseモデルを導入したアーキテクチャ
 
 ## キーワード
