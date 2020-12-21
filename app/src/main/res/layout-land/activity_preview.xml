@@ -17,16 +17,13 @@
         tools:context=".presentation.ui.preview.PreviewActivity"
         tools:showPaths="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/previewToolbar"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:background="@color/colorPrimaryDark"
-            android:theme="@style/toolbarTheme"
+        <include
+            android:id="@+id/topBar"
+            layout="@layout/topbar"
+            app:item="@{viewModel.topBarItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@android:color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/changeContainer1"
@@ -50,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/border"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <View
             android:id="@+id/border"
@@ -60,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton4"
@@ -74,7 +71,7 @@
             app:borderWidth="0dp"
             app:fabSize="mini"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
             app:srcCompat="@drawable/visibility"
             app:tint="@android:color/white" />
 
@@ -117,6 +114,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/border"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

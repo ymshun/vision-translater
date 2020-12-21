@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="SpUsage">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.visiontranslator.presentation.ui.base.ToolBarItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@{safeUnbox(item.backgroundResId)}"
+        tools:background="@color/colorPrimaryDark">
+
+        <LinearLayout
+            android:id="@+id/leftLayout"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:onClick="@{() -> item.onClickResLeft()}"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/leftImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:paddingStart="17dp"
+                android:paddingLeft="17dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:scaleType="fitCenter"
+                app:imageResId="@{safeUnbox(item.leftImageResId)}"
+                app:tint="@android:color/white"
+                app:isVisibleGone="@{item.leftImageResId != null}"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical|left"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text='@{item.title ?? ""}'
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/leftLayout"
+            app:layout_constraintRight_toLeftOf="@id/rightLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:isVisibleGone="@{item.title != null}"
+            tools:text="タイトル" />
+
+        <LinearLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:onClick="@{() -> item.onClickResRight()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/rightImage"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingEnd="17dp"
+                android:paddingRight="17dp"
+                android:scaleType="fitCenter"
+                app:imageResId="@{safeUnbox(item.rightImageResId)}"
+                app:isVisibleGone="@{item.rightImageResId != null}"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

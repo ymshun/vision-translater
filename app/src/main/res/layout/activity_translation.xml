@@ -16,16 +16,13 @@
         android:background="@color/cardview_dark_background"
         tools:context=".presentation.ui.translation.TranslationActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/translationToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/colorPrimaryDark"
-            android:theme="@style/toolbarTheme"
+        <include
+            android:id="@+id/topBar"
+            layout="@layout/topbar"
+            app:item="@{viewModel.topBarItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@android:color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -41,7 +38,7 @@
             app:iconTint="@android:color/white"
             app:isVisible="@{viewModel.isVisibleNav}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/translationToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/cropFab"
@@ -85,7 +82,7 @@
             app:layout_constraintBottom_toTopOf="@id/translateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/translationToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <Button
             android:id="@+id/translateBtn"

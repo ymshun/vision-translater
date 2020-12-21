@@ -9,13 +9,15 @@ import kotlinx.coroutines.launch
 
 /**
  * viewModelはこれを継承する
- * コルーチン、トラッカーなどをラッピングして使いやすくしている
- * suspend関数を作ってコルーチンを使うときはsuspend関数をメインセーフティにすること
+ * コルーチン、トラッカーなどをラッピング
  */
 abstract class BaseViewModel(
     private val applicationContext: Context,
     private val viewModelName: String
 ) : ViewModel(), LifecycleObserver {
+
+    val topBarItem: ToolBarItem = ToolBarItem()
+
     // APIリクエストなどのコルーチンのローディングフラグ
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>

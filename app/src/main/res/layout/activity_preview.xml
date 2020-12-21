@@ -18,16 +18,13 @@
         tools:context=".presentation.ui.preview.PreviewActivity"
         tools:showPaths="true">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/previewToolbar"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:background="@color/colorPrimaryDark"
-            android:theme="@style/toolbarTheme"
+        <include
+            android:id="@+id/topBar"
+            layout="@layout/topbar"
+            app:item="@{viewModel.topBarItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@android:color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/previewContainer1"
@@ -37,7 +34,7 @@
             app:layout_constraintBottom_toTopOf="@id/border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/changeContainer1"
@@ -62,21 +59,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:alpha="0.75"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="@{()->viewModel.showControlBtn()}"
             app:borderWidth="0dp"
             app:fabSize="mini"
-            app:layout_constraintTop_toBottomOf="@id/previewToolbar"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
             app:srcCompat="@drawable/visibility"
             app:tint="@android:color/white" />
 
@@ -103,9 +100,9 @@
             android:layout_marginBottom="8dp"
             android:alpha="0.5"
             android:onClick="@{()->viewModel.changeContainer2()}"
-            app:isVisible="@{viewModel.showControlBtn}"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="mini"
+            app:isVisible="@{viewModel.showControlBtn}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/repeat" />

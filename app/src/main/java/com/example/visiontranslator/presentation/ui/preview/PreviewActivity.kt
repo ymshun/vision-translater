@@ -3,8 +3,8 @@ package com.example.visiontranslator.presentation.ui.preview
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -69,16 +69,16 @@ class PreviewActivity : AppCompatActivity() {
         setupDialog()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return true
-    }
-
     private fun setupToolbar() {
-        setSupportActionBar(binding.previewToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        viewModel.topBarItem.apply {
+            backgroundResId.set(ContextCompat.getColor(this@PreviewActivity, R.color.colorPrimaryDark))
+            leftImageResId.set(R.drawable.arrow_back)
+            title.set("プレビュー")
+
+            leftClickListener = {
+                onBackPressed()
+            }
+        }
     }
 
     /**

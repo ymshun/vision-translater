@@ -15,16 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/editToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/colorPrimaryDark"
-            android:theme="@style/toolbarTheme"
+        <include
+            android:id="@+id/topBar"
+            layout="@layout/topbar"
+            app:item="@{viewModel.topBarItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@android:color/white" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -54,7 +51,7 @@
             app:layout_constraintBottom_toTopOf="@+id/translateBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editToolbar" />
+            app:layout_constraintTop_toBottomOf="@id/topBar" />
 
         <Button
             android:id="@+id/translateBtn"

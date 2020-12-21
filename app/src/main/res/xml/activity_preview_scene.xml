@@ -22,7 +22,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/previewToolbar"
+            motion:layout_constraintTop_toBottomOf="@id/topBar"
             motion:layout_constraintVertical_bias="0.7" />
     </ConstraintSet>
     <Transition
@@ -44,7 +44,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/previewToolbar"
+            motion:layout_constraintTop_toBottomOf="@id/topBar"
             motion:layout_constraintVertical_bias="0.3" />
     </ConstraintSet>
     <Transition
@@ -67,7 +67,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/previewToolbar"
+            motion:layout_constraintTop_toBottomOf="@id/topBar"
             motion:layout_constraintVertical_bias="0.85" />
     </ConstraintSet>
     <Transition
@@ -90,7 +90,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/previewToolbar"
+            motion:layout_constraintTop_toBottomOf="@id/topBar"
             motion:layout_constraintVertical_bias="0.15" />
     </ConstraintSet>
     <Transition

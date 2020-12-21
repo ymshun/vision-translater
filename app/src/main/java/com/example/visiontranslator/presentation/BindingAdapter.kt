@@ -13,6 +13,11 @@ import com.example.visiontranslator.infra.model.translation.Translation
  * プロジェクトの大きさによっては画面ごとに分けるほうが圧倒的に良いがこの規模ならこのファイルで一元管理する
  */
 
+@BindingAdapter("app:imageResId")
+fun ImageView.loadImageRes(resId: Int) {
+    setImageResource(resId)
+}
+
 @BindingAdapter("app:glideSrc")
 fun ImageView.setImageSrcString(src: String?) {
     Glide.with(this.context).load(src).into(this)

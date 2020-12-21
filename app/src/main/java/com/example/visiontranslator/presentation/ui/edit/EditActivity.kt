@@ -3,8 +3,8 @@ package com.example.visiontranslator.presentation.ui.edit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.visiontranslator.AppApplication
@@ -48,16 +48,16 @@ class EditActivity : AppCompatActivity(),
         setupDialog()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return true
-    }
-
     private fun setupToolbar() {
-        setSupportActionBar(binding.editToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        viewModel.topBarItem.apply {
+            backgroundResId.set(ContextCompat.getColor(this@EditActivity, R.color.colorPrimaryDark))
+            leftImageResId.set(R.drawable.arrow_back)
+            title.set("英語翻訳")
+
+            leftClickListener = {
+                onBackPressed()
+            }
+        }
     }
 
     /**
