@@ -1,8 +1,5 @@
 # vision-translater
 ### 写真翻訳アプリ
-サンプルapk(deploy gate) : https://dply.me/wjw1yd
-
-<img width="180" src="https://deploygate.com/qr?data=https%3A%2F%2Fdeploygate.com%2Fdistributions%2Fe62d2b7822e82c0de4abdceb1d737d6f19b5ad8f&size=178" />
 
 ## OverView
 <img width="300" src="https://user-images.githubusercontent.com/52367439/101560134-e966ad80-3a05-11eb-9798-533ffc166034.gif"/> <img width="300" src="https://user-images.githubusercontent.com/52367439/101560147-ee2b6180-3a05-11eb-88fd-0d48ae841931.gif"/>
